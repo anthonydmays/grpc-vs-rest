@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package proto.contacts.v1;
+
+service ContactsService {
+  rpc ListContacts(ListContactsRequest) returns (ListContactsResponse);
+
+  rpc GetContact(GetContactRequest) returns (GetContactResponse);
+
+  rpc UpdateContact(UpdateContactRequest) returns (UpdateContactResponse);
+}
+
+message ListContactsRequest {
+  int32 page_size = 1;
+  int32 page_number = 2;
+  string order_by = 3;
+}
+
+message ListContactsResponse {
+  repeated Contact contacts = 1;
+}
+
+message GetContactRequest {
+  string uri = 1;
+}
+
+message GetContactResponse {
+  Contact contact = 1;
+}
+
+message UpdateContactRequest {
+  Contact contact = 1;
+}
+
+message UpdateContactResponse {
+  Contact contact = 1;
+}
+
+message Contact {
+    string uri = 1;
+    string first_name = 2;
+    string last_name = 3;
+    string email = 4;
+}

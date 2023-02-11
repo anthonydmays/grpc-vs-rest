@@ -1,0 +1,34 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+node_modules
+.pnp
+.pnp.js
+
+# testing
+coverage
+
+# production
+dist
+
+# misc
+.DS_Store
+**/.env
+**/.env.*
+*.tsbuildinfo
+
+# Debug logs
+*-debug.log*
+
+# Local Firebase folder
+.firebase
+
+# Test data folder
+.testdata
+
+# Keys
+firebaseServiceAccountKey.json
+
+# Vim files
+*.swp
+*.swo
