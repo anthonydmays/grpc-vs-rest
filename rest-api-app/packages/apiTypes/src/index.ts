@@ -1,14 +1,23 @@
 export interface Contact {
-  id: number;
+  uri: string;
   firstName: string;
   lastName: string;
   email: string;
 }
 
+export interface ContactResource extends Contact {
+  _links: Record<string, Link>;
+}
+
 export interface ApiResponse {
   data: unknown;
-  _links: Link[];
+  _links?: Record<string, Link>;
 }
+
+export type Link = {
+  href: string;
+  type: "GET" | "POST" | "PUT" | "DELETE";
+};
 
 export interface ErrorResponse {
   message: string;
@@ -16,7 +25,7 @@ export interface ErrorResponse {
 
 export interface GetContactsResponse extends ApiResponse {
   data: {
-    list: Contact[];
+    list: ContactResource[];
     pageNumber: number;
     pageSize: number;
     totalCount: number;
@@ -24,11 +33,5 @@ export interface GetContactsResponse extends ApiResponse {
 }
 
 export interface GetContactResponse extends ApiResponse {
-  data: Contact;
+  data: ContactResource;
 }
-
-export type Link = {
-  rel: string;
-  href: string;
-  type: "GET" | "POST" | "PUT" | "DELETE";
-};

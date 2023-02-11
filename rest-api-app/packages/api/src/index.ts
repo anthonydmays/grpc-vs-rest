@@ -6,7 +6,7 @@ import {
 } from 'apiTypes/src/index.js';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import express, { json, Response } from 'express';
+import express, { json, Request, Response } from 'express';
 import {
   getContact,
   getContacts,
@@ -35,7 +35,7 @@ app.get('/contacts', (req, res: Response<GetContactsResponse>) => {
 
   // Assemble list of contacts and paging information.
   const data = {
-    list: getContacts({ pageSize, pageNumber, orderBy }),
+    list: getContactResources(req, { pageSize, pageNumber, orderBy }),
     pageSize,
     pageNumber,
     totalCount,
@@ -48,12 +48,26 @@ app.get('/contacts', (req, res: Response<GetContactsResponse>) => {
   res.json({ data, _links });
 });
 
+function getContactResources(
+  req: Request,
+  opts: {
+    pageSize: number;
+    pageNumber: number;
+    orderBy: string;
+  },
+) {
+  const contacts = getContacts(opts).map((c) => ({
+    ...c,
+    _links: getContactLinks(req, c.uri),
+  }));
+  return contacts;
+}
+
 app.get(
   '/contacts/:id',
   (req, res: Response<GetContactResponse | ErrorResponse>) => {
-    const id = Number(req.params.id);
-
-    const contact = getContact(Number(id));
+    const uri = req.path.slice(1);
+    const contact = getContact(uri);
 
     // If the contact isn't found, return the not found status.
     if (!contact) {
@@ -63,28 +77,25 @@ app.get(
     }
 
     // Assemble the contact data.
-    const data = { ...contact };
+    const data = { ...contact, _links: getContactLinks(req, uri) };
 
-    // Provide contextual links informing the client of useful resources related to this contact.
-    const _links = getContactLinks(req, id);
-
-    res.json({ data, _links });
+    res.json({ data });
   },
 );
 
 app.put(
   '/contacts/:id',
   (req, res: Response<GetContactResponse | ErrorResponse>) => {
-    const id = Number(req.params.id);
+    const uri = req.path.slice(1);
 
-    if (!getContact(id)) {
+    if (!getContact(uri)) {
       res.status(404);
       res.json({ message: 'Contact not found' });
       return;
     }
 
     try {
-      updateContact(id, req.body as Contact);
+      updateContact(uri, req.body as Contact);
     } catch (error) {
       res.status(400);
       res.json({ message: 'Bad request' });
@@ -92,10 +103,11 @@ app.put(
     }
 
     const data = {
-      ...getContact(id)!,
+      ...getContact(uri)!,
+      _links: getContactLinks(req, uri),
     };
 
-    const _links = getContactLinks(req, id);
+    const _links = getContactLinks(req, uri);
 
     res.json({ data, _links });
   },

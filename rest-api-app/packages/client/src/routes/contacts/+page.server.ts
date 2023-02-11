@@ -2,8 +2,8 @@ import { error, redirect } from '@sveltejs/kit';
 import type { PageServerLoad, Actions } from './$types';
 import type { GetContactResponse, Contact } from '@grpc-vs-rest/api-types';
 
-export const load = (async ({ fetch, params }) => {
-	const res = (await (await fetch(`/api/contacts/${params.id}`)).json()) as GetContactResponse;
+export const load = (async ({ fetch, url, params }) => {
+	const res = (await (await fetch(`${url.searchParams.get('url')}`)).json()) as GetContactResponse;
 
 	if (res) {
 		return res;
@@ -21,13 +21,20 @@ export const actions = {
 		contact.lastName = String(data.get('lastName'));
 		contact.email = String(data.get('email'));
 
-		await fetch(`/api/contacts/${params.id}`, {
-			method: 'PUT',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(contact)
-		});
+		const contactUrl = String(data.get('url'));
+
+		console.log('contacts url is', contactUrl);
+		try {
+			await fetch(`${contactUrl}`, {
+				method: 'PUT',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(contact)
+			});
+		} catch (error) {
+			console.log('error', error);
+		}
 
 		throw redirect(303, '/');
 	}

@@ -7,8 +7,7 @@
 <table>
 	{#each data.data.list as contact}
 		<tr>
-			<td><a href="/contacts/{contact.id}">Edit</a></td>
-			<td>{contact.id}</td>
+			<td><a href="contacts?url={contact._links['self'].href}">Edit</a></td>
 			<td>{contact.firstName}</td>
 			<td>{contact.lastName}</td>
 			<td>{contact.email}</td>

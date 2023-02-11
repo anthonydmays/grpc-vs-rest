@@ -28,18 +28,18 @@ export function getContacts(opts: {
     .value();
 }
 
-export function getContact(id: number): Contact | undefined {
-  return _(db.data?.contacts).find((c) => c.id === id);
+export function getContact(uri: string): Contact | undefined {
+  return _(db.data?.contacts).find((c) => c.uri === uri);
 }
 
-export function updateContact(id: number, contact: Contact) {
-  const index = db.data?.contacts.findIndex((c) => c.id === id) ?? -1;
+export function updateContact(uri: string, contact: Contact) {
+  const index = db.data?.contacts.findIndex((c) => c.uri === uri) ?? -1;
   if (index < 0) {
     throw new Error('Contact not found');
   }
 
   const oldContact = db.data!.contacts[index];
-  db.data!.contacts[index] = { ...oldContact, ...contact, id };
+  db.data!.contacts[index] = { ...oldContact, ...contact, uri };
 }
 
 export function getContactsCount(): number {

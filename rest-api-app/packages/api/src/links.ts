@@ -7,45 +7,39 @@ export function getPagingLinks(opts: {
   pageNumber: number;
   pageSize: number;
   totalCount: number;
-}): Link[] {
+}): Record<string, Link> {
   const { req, pageNumber, pageSize, totalCount } = opts;
-  const _links: Link[] = [
-    {
-      rel: 'self',
+  const _links: Record<string, Link> = {
+    self: {
       type: 'GET',
       href: getPagingUrl(req, pageNumber),
     },
-    {
-      rel: 'firstPage',
+    firstPage: {
       type: 'GET',
       href: getPagingUrl(req, 0),
     },
-    {
-      rel: 'lastPage',
+    lastPage: {
       type: 'GET',
       href: getPagingUrl(req, Math.floor(totalCount / pageSize)),
     },
-    {
-      rel: 'orderByLastName',
+    orderByLastName: {
       type: 'GET',
       href: getPagingUrl(req, 0, 'lastName'),
     },
-  ];
+  };
 
   if (pageNumber > 0) {
-    _links.push({
-      rel: 'previousPage',
+    _links['previousPage'] = {
       type: 'GET',
       href: getPagingUrl(req, pageNumber - 1),
-    });
+    };
   }
 
   if (pageSize * (pageNumber + 2) < totalCount) {
-    _links.push({
-      rel: 'nextPage',
+    _links['nextPage'] = {
       type: 'GET',
       href: getPagingUrl(req, pageNumber + 1),
-    });
+    };
   }
 
   return _links;
@@ -61,14 +55,16 @@ function getPagingUrl(req: Request, pageNumber?: number, orderBy?: string) {
   return urljoin(getBaseUrl(req), pageNumberParam, orderByParam);
 }
 
-export function getContactLinks(req: Request, id: number): Link[] {
-  const _links: Link[] = [
-    {
-      rel: 'self',
-      href: urlJoin(getBaseUrl(req), `/${id}`),
+export function getContactLinks(
+  req: Request,
+  uri: string,
+): Record<string, Link> {
+  const _links: Record<string, Link> = {
+    self: {
+      href: urlJoin(getBaseUrl(req), uri.replace('contacts/', '')),
       type: 'GET',
     },
-  ];
+  };
   return _links;
 }
 
