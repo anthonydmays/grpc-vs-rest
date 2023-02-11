@@ -9,7 +9,8 @@
 		"skipLibCheck": true,
 		"sourceMap": true,
 		"strict": true,
-		"composite": true
+		"composite": true,
+		"outDir": "./dist"
 	},
 	"references": [
 		{
