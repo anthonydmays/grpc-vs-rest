@@ -18,5 +18,6 @@ export const load = (async ({ fetch, params }) => {
 		orderBy: 'firstName'
 	});
 
-	return { contacts: JSON.parse(JSON.stringify(res.contacts)) };
+	const contacts = JSON.parse(JSON.stringify(res.contacts));
+	return { contacts };
 }) satisfies PageServerLoad;
