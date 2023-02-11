@@ -10,11 +10,8 @@ export const load = (async ({ fetch, params }) => {
 		httpVersion: '2',
 		baseUrl
 	});
-
-	// @ts-ignore
 	const client = createPromiseClient(ContactsService, transport);
 
-	// @ts-ignore
 	const res: ListContactsResponse = await client.listContacts({
 		pageNumber: 0,
 		pageSize: 25,

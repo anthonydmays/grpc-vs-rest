@@ -1,25 +1,18 @@
 import { createHandlers, mergeHandlers } from '@bufbuild/connect-node';
-import {
-  ContactsService,
-  GetContactRequest,
-  ListContactsRequest,
-  ListContactsResponse,
-  UpdateContactRequest,
-} from '@grpc-vs-rest/api-types';
+import { ContactsService } from '@grpc-vs-rest/api-types';
 import http2 from 'http2';
 import { getContacts } from './contacts.js';
 
-// @ts-ignore
 const handlers = createHandlers(ContactsService, {
-  listContacts(req: ListContactsRequest): ListContactsResponse {
+  listContacts(req) {
     const { pageNumber, pageSize, orderBy } = req;
     const contacts = getContacts({ pageNumber, pageSize, orderBy });
     return { contacts };
   },
-  getContact(req: GetContactRequest) {
+  getContact(req) {
     return {};
   },
-  updateContact(req: UpdateContactRequest) {
+  updateContact(req) {
     return {};
   },
 });
