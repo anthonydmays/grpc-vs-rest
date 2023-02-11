@@ -23,18 +23,13 @@ export const actions = {
 
 		const contactUrl = String(data.get('url'));
 
-		console.log('contacts url is', contactUrl);
-		try {
-			await fetch(`${contactUrl}`, {
-				method: 'PUT',
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify(contact)
-			});
-		} catch (error) {
-			console.log('error', error);
-		}
+		await fetch(`${contactUrl}`, {
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(contact)
+		});
 
 		throw redirect(303, '/');
 	}
