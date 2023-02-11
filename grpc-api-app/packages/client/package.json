@@ -33,6 +33,8 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@bufbuild/connect-node": "^0.7.0",
+		"@bufbuild/connect-web": "^0.7.0",
 		"@grpc-vs-rest/api-types": "*",
 		"@grpc/grpc-js": "^1.8.8"
 	}

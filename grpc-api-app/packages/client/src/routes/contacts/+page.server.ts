@@ -1,6 +1,6 @@
+import type { Contact, GetContactResponse } from '@grpc-vs-rest/api-types';
 import { error, redirect } from '@sveltejs/kit';
-import type { PageServerLoad, Actions } from './$types';
-import { type GetContactResponse, Contact } from '@grpc-vs-rest/api-types';
+import type { Actions, PageServerLoad } from './$types';
 
 export const load = (async ({ fetch, url, params }) => {
 	const res = (await (await fetch(`${url.searchParams.get('url')}`)).json()) as GetContactResponse;
@@ -16,10 +16,10 @@ export const actions = {
 	default: async ({ fetch, request, params }) => {
 		const data = await request.formData();
 
-		const contact = new Contact();
-		contact.setFirstName(String(data.get('firstName')));
-		contact.setLastName(String(data.get('lastName')));
-		contact.setEmail(String(data.get('email')));
+		const contact: Partial<Contact> = {};
+		contact.firstName = String(data.get('firstName'));
+		contact.lastName = String(data.get('lastName'));
+		contact.email = String(data.get('email'));
 
 		const contactUrl = String(data.get('url'));
 

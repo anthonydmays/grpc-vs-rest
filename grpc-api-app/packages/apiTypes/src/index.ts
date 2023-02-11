@@ -6,9 +6,5 @@ export {
   ListContactsResponse,
   UpdateContactRequest,
   UpdateContactResponse,
-} from "./proto/contacts/v1/contacts_pb";
-export {
-  ContactsServiceClient,
-  ContactsServiceService,
-  type IContactsServiceServer,
-} from "./proto/contacts/v1/contacts_grpc_pb";
+} from "./proto/contacts/v1/contacts_pb.js";
+export { ContactsService } from "./proto/contacts/v1/contacts_connectweb.js";

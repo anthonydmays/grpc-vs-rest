@@ -1,23 +1,27 @@
 import { env } from '$env/dynamic/private';
-import { Contact, ContactsServiceClient, ListContactsRequest } from '@grpc-vs-rest/api-types';
-import { credentials } from '@grpc/grpc-js';
+import { createGrpcTransport, createPromiseClient } from '@bufbuild/connect-node';
+import { ContactsService, ListContactsResponse } from '@grpc-vs-rest/api-types';
 import type { PageServerLoad } from './$types';
 
 export const load = (async ({ fetch, params }) => {
-	const apiEndpoint = env.API_ENDPOINT || 'http://localhost:9090/contacts';
+	const baseUrl = env.API_ENDPOINT || 'http://localhost:9090';
 
-	const client = new ContactsServiceClient(apiEndpoint, credentials.createInsecure());
-	const request = new ListContactsRequest();
-	request.setPageSize(25);
-	request.setPageNumber(0);
-	request.setOrderBy('lastName');
-
-	const contacts = await new Promise<Contact.AsObject[]>((resolve) => {
-		client.listContacts(request, (err, res) => {
-			const contacts = res.getContactsList().map((p) => p.toObject());
-			resolve(contacts);
-		});
+	const transport = createGrpcTransport({
+		httpVersion: '2',
+		baseUrl
 	});
 
-	return { contacts };
+	// @ts-ignore
+	const client = createPromiseClient(ContactsService, transport);
+
+	// @ts-ignore
+	const res: ListContactsResponse = await client.listContacts({
+		pageNumber: 0,
+		pageSize: 25,
+		orderBy: 'firstName'
+	});
+
+	console.log('what is this', JSON.stringify(res.contacts));
+
+	return { contacts: JSON.parse(JSON.stringify(res.contacts)) };
 }) satisfies PageServerLoad;

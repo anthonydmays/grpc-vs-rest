@@ -1,13 +1,11 @@
 # /proto/buf.gen.yaml
 version: v1
 plugins:
-  - name: js
-    out: ./src/
-    opt: import_style=commonjs,binary
-  - name: grpc
-    out: ./src/
-    opt: grpc_js
-    path: grpc_tools_node_protoc_plugin
-  - name: ts
-    out: ./src/
-    opt: grpc_js
+  - name: es
+    path: ../../node_modules/.bin/protoc-gen-es
+    opt: target=ts
+    out: src
+  - name: connect-web
+    path: ../../node_modules/.bin/protoc-gen-connect-web
+    opt: target=ts
+    out: src
