@@ -9,10 +9,7 @@
       "strict": true,
       "skipLibCheck": true,
       "composite": true,
-      "baseUrl": "./packages",
-      "paths": {
-        "@grpc-vs-rest/*": ["packages/*/src"]
-      }
+      "baseUrl": "./packages"
     },
     "references": [
       { "path": "./packages/api/" },
