@@ -33,6 +33,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@grpc-vs-rest/api-types": "*"
+		"@grpc-vs-rest/api-types": "*",
+		"@grpc/grpc-js": "^1.8.8"
 	}
 }
