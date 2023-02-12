@@ -1,5 +1,5 @@
 {
-	"name": "client",
+	"name": "@grpc-vs-rest/client",
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
