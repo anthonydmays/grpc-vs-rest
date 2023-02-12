@@ -3,7 +3,7 @@ import {
   ErrorResponse,
   GetContactResponse,
   GetContactsResponse,
-} from 'apiTypes/src/index.js';
+} from '@grpc-vs-rest/api-types';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import express, { json, Request, Response } from 'express';

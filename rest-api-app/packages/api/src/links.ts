@@ -1,4 +1,4 @@
-import { Link } from 'apiTypes/src/index.js';
+import { Link } from '@grpc-vs-rest/api-types';
 import { Request } from 'express';
 import { default as urlJoin, default as urljoin } from 'url-join';
 
