@@ -1,13 +1,22 @@
 import { createHandlers, mergeHandlers } from '@bufbuild/connect-node';
 import { ContactsService } from '@grpc-vs-rest/api-types';
 import http2 from 'http2';
-import { getContacts } from './contacts.js';
+import { getContacts, getContactsCount } from './contacts.js';
 
 const handlers = createHandlers(ContactsService, {
   listContacts(req) {
-    const { pageNumber, pageSize, orderBy } = req;
+    let { pageNumber, pageSize, orderBy } = req;
+    pageSize = pageSize ?? 25;
+    pageNumber = pageNumber ?? 0;
+    orderBy = orderBy || 'lastName';
     const contacts = getContacts({ pageNumber, pageSize, orderBy });
-    return { contacts };
+    return {
+      contacts,
+      pageNumber,
+      pageSize,
+      orderBy,
+      totalCount: getContactsCount(),
+    };
   },
   getContact(req) {
     return {};

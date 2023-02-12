@@ -64,6 +64,26 @@ export class ListContactsResponse extends Message<ListContactsResponse> {
    */
   contacts: Contact[] = [];
 
+  /**
+   * @generated from field: int32 page_size = 2;
+   */
+  pageSize = 0;
+
+  /**
+   * @generated from field: int32 page_number = 3;
+   */
+  pageNumber = 0;
+
+  /**
+   * @generated from field: string order_by = 4;
+   */
+  orderBy = "";
+
+  /**
+   * @generated from field: int32 total_count = 5;
+   */
+  totalCount = 0;
+
   constructor(data?: PartialMessage<ListContactsResponse>) {
     super();
     proto3.util.initPartial(data, this);
@@ -73,6 +93,10 @@ export class ListContactsResponse extends Message<ListContactsResponse> {
   static readonly typeName = "proto.contacts.v1.ListContactsResponse";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "contacts", kind: "message", T: Contact, repeated: true },
+    { no: 2, name: "page_size", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
+    { no: 3, name: "page_number", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
+    { no: 4, name: "order_by", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 5, name: "total_count", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ListContactsResponse {

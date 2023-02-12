@@ -18,6 +18,10 @@ message ListContactsRequest {
 
 message ListContactsResponse {
   repeated Contact contacts = 1;
+  int32 page_size = 2;
+  int32 page_number = 3;
+  string order_by = 4;
+  int32 total_count = 5;
 }
 
 message GetContactRequest {
