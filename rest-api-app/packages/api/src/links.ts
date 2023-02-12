@@ -22,9 +22,17 @@ export function getPagingLinks(opts: {
       type: 'GET',
       href: getPagingUrl(req, Math.floor(totalCount / pageSize)),
     },
+    orderByFirstName: {
+      type: 'GET',
+      href: getPagingUrl(req, 0, 'firstName'),
+    },
     orderByLastName: {
       type: 'GET',
       href: getPagingUrl(req, 0, 'lastName'),
+    },
+    orderByEmail: {
+      type: 'GET',
+      href: getPagingUrl(req, 0, 'email'),
     },
   };
 
@@ -35,7 +43,7 @@ export function getPagingLinks(opts: {
     };
   }
 
-  if (pageSize * (pageNumber + 2) < totalCount) {
+  if (pageSize * (pageNumber + 1) < totalCount) {
     _links['nextPage'] = {
       type: 'GET',
       href: getPagingUrl(req, pageNumber + 1),
