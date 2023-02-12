@@ -3,7 +3,7 @@
   "compilerOptions": {
     "rootDir": "./src",
     "target": "esnext",
-    "module": "node16",
+    "module": "esnext",
     "outDir": "./dist",
     "allowJs": true,
     "esModuleInterop": true

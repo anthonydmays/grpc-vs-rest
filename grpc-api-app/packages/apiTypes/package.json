@@ -2,12 +2,16 @@
   "name": "@grpc-vs-rest/api-types",
   "version": "1.0.0",
   "description": "",
+  "main": "./dist/cjs/index.js",
   "type": "module",
-  "main": "dist/index.js",
-  "typings": "dist/index.d.ts",
-  "exports": "./dist/index.js",
+  "types": "./dist/types/index.d.ts",
+  "exports": {
+    "import": "./dist/esm/index.js",
+    "require": "./dist/cjs/index.js",
+    "types": "./dist/types/index.d.ts"
+  },
   "files": [
-    "dist"
+    "dist/**/"
   ],
   "keywords": [],
   "author": "",
@@ -17,7 +21,7 @@
     "clean": "rm -rf ./dist/cjs/* ./dist/esm/* ./dist/types/*",
     "build": "npm run build:cjs && npm run build:esm+types",
     "build:cjs": "../../node_modules/typescript/bin/tsc --project tsconfig.json --module commonjs --outDir ./dist/cjs && echo >./dist/cjs/package.json '{\"type\":\"commonjs\"}'",
-    "build:esm+types": "../../node_modules/typescript/bin/tsc --project tsconfig.json --module ES2015 --outDir ./dist/esm --declaration --declarationDir ./dist/types"
+    "build:esm+types": "../../node_modules/typescript/bin/tsc --project tsconfig.json --module esnext --outDir ./dist/esm --declaration --declarationDir ./dist/types"
   },
   "devDependencies": {
     "@bufbuild/buf": "^1.14.0",

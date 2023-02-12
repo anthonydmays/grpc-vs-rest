@@ -2,17 +2,7 @@
   "name": "@grpc-vs-rest/api",
   "version": "1.0.0",
   "description": "",
-  "main": "./dist/cjs/index.js",
-  "type": "module",
-  "types": "./dist/types/index.d.ts",
-  "exports": {
-    "import": "./dist/esm/index.js",
-    "require": "./dist/cjs/index.js",
-    "types": "./dist/types/index.d.ts"
-  },
-  "files": [
-    "dist/**/"
-  ],
+  "main": "./dist/index.js",
   "scripts": {
     "lint": "eslint .",
     "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
