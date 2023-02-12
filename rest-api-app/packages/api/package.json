@@ -2,7 +2,7 @@
   "name": "@grpc-vs-rest/api",
   "version": "1.0.0",
   "description": "",
-  "exports": "./dist/index.js",
+  "main": "./dist/index.js",
   "type": "module",
   "scripts": {
     "lint": "eslint .",
