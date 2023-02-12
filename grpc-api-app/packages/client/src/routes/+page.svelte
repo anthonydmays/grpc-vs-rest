@@ -40,7 +40,7 @@
 <table>
 	{#each data.contacts as contact}
 		<tr>
-			<td><a href="contacts?url={contact.uri}">Edit</a></td>
+			<td><a href="contacts?uri={contact.uri}">Edit</a></td>
 			<td>{contact.firstName}</td>
 			<td>{contact.lastName}</td>
 			<td>{contact.email}</td>
