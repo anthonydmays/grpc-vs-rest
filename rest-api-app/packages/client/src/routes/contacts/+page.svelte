@@ -4,14 +4,39 @@
 	export let data: PageData;
 </script>
 
+<style>
+	nav {
+		margin-bottom: 16px;
+	}
+
+	.field {
+		display: grid;
+    	grid-template-columns: 120px auto;
+		grid-column-start: 1;
+    	grid-column-end: 2;
+		margin-bottom: 8px;
+		width: 380px;
+	}
+</style>
+
 <h1>Edit Contact</h1>
+<nav style="margin-bottom: 16px;">
+	<a href="/">{'<'} Back to all contacts</a>
+</nav>
+
 <form method="post">
 	<input name="url" type="hidden" bind:value={data.resource._links['self'].href} />
-	<label for="firstName">First Name</label>
-	<input name="firstName" type="text" bind:value={data.resource.firstName} />
-	<label for="lastName">Last Name</label>
-	<input name="lastName" type="text" bind:value={data.resource.lastName} />
-	<label for="email">Email</label>
-	<input name="email" type="text" bind:value={data.resource.email} />
+	<div class="field">
+		<label for="firstName">First Name</label>
+		<input name="firstName" type="text" bind:value={data.resource.firstName} />
+	</div>
+	<div class="field">
+		<label for="lastName">Last Name</label>
+		<input name="lastName" type="text" bind:value={data.resource.lastName} />
+	</div>
+	<div class="field">
+		<label for="email">Email</label>
+		<input name="email" type="email" bind:value={data.resource.email} />
+	</div>
 	<button type="submit">Save contact</button>
 </form>

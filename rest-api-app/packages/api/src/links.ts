@@ -73,6 +73,12 @@ export function getContactLinks(
       type: 'GET',
     },
   };
+  if (req.params['id']) {
+    _links['allContacts'] = {
+      href: getBaseUrl(req),
+      type: 'GET',
+    };
+  }
   return _links;
 }
 

@@ -18,29 +18,29 @@
 </style>
 
 <nav>
-	{#if data._links.firstPage}
+	{#if data._links?.firstPage}
 		<a href="?url={data._links.firstPage.href}">{'<<'}</a> |
 	{/if}
-	{#if data._links.previousPage}
+	{#if data._links?.previousPage}
 		<a href="?url={data._links.previousPage.href}">{'<'}</a>  |
 	{/if}
-	{#if data._links.nextPage}
+	{#if data._links?.nextPage}
 		<a href="?url={data._links.nextPage.href}">{'>'}</a>  |
 	{/if}
-	{#if data._links.lastPage}
+	{#if data._links?.lastPage}
 		<a href="?url={data._links.lastPage.href}">{'>>'}</a>
 	{/if}
 </nav>
 
 <div class="orderby">
 	Order by:
-	{#if data._links.orderByFirstName}
+	{#if data._links?.orderByFirstName}
 		<a href="?url={data._links.orderByFirstName.href}">First name</a>  |
 	{/if}
-	{#if data._links.orderByLastName}
+	{#if data._links?.orderByLastName}
 		<a href="?url={data._links.orderByLastName.href}">Last name</a>  |
 	{/if}
-	{#if data._links.orderByEmail}
+	{#if data._links?.orderByEmail}
 		<a href="?url={data._links.orderByEmail.href}">Email</a>
 	{/if}
 </div>
