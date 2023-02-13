@@ -34,7 +34,7 @@ app.get('/contacts', (req, res: Response<GetContactsResponse>) => {
   const totalCount = getContactsCount();
 
   // Assemble list of contacts and paging information.
-  const data = {
+  const resource = {
     list: getContactResources(req, { pageSize, pageNumber, orderBy }),
     pageSize,
     pageNumber,
@@ -45,7 +45,7 @@ app.get('/contacts', (req, res: Response<GetContactsResponse>) => {
   // data.
   const _links = getPagingLinks({ req, pageNumber, pageSize, totalCount });
 
-  res.json({ data, _links });
+  res.json({ resource, _links });
 });
 
 function getContactResources(
@@ -77,9 +77,9 @@ app.get(
     }
 
     // Assemble the contact data.
-    const data = { ...contact, _links: getContactLinks(req, uri) };
+    const resource = { ...contact, _links: getContactLinks(req, uri) };
 
-    res.json({ data });
+    res.json({ resource });
   },
 );
 
@@ -102,14 +102,14 @@ app.put(
       return;
     }
 
-    const data = {
+    const resource = {
       ...getContact(uri)!,
       _links: getContactLinks(req, uri),
     };
 
     const _links = getContactLinks(req, uri);
 
-    res.json({ data, _links });
+    res.json({ resource, _links });
   },
 );
 

@@ -6,12 +6,12 @@
 
 <h1>Edit Contact</h1>
 <form method="post">
-	<input name="url" type="hidden" bind:value={data.data._links['self'].href} />
+	<input name="url" type="hidden" bind:value={data.resource._links['self'].href} />
 	<label for="firstName">First Name</label>
-	<input name="firstName" type="text" bind:value={data.data.firstName} />
+	<input name="firstName" type="text" bind:value={data.resource.firstName} />
 	<label for="lastName">Last Name</label>
-	<input name="lastName" type="text" bind:value={data.data.lastName} />
+	<input name="lastName" type="text" bind:value={data.resource.lastName} />
 	<label for="email">Email</label>
-	<input name="email" type="text" bind:value={data.data.email} />
+	<input name="email" type="text" bind:value={data.resource.email} />
 	<button type="submit">Save contact</button>
 </form>

@@ -46,7 +46,7 @@
 </div>
 
 <table>
-	{#each data.data.list as contact}
+	{#each data.resource.list as contact}
 		<tr>
 			<td><a href="contacts?url={contact._links.self.href}">Edit</a></td>
 			<td>{contact.firstName}</td>

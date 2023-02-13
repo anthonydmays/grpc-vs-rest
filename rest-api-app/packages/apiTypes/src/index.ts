@@ -10,7 +10,7 @@ export interface ContactResource extends Contact {
 }
 
 export interface ApiResponse {
-  data: unknown;
+  resource: unknown;
   _links?: Record<string, Link>;
 }
 
@@ -24,7 +24,7 @@ export interface ErrorResponse {
 }
 
 export interface GetContactsResponse extends ApiResponse {
-  data: {
+  resource: {
     list: ContactResource[];
     pageNumber: number;
     pageSize: number;
@@ -33,5 +33,5 @@ export interface GetContactsResponse extends ApiResponse {
 }
 
 export interface GetContactResponse extends ApiResponse {
-  data: ContactResource;
+  resource: ContactResource;
 }
