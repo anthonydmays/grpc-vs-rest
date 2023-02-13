@@ -13,7 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "typescript": "^4.9.5",
-    "@grpc-vs-rest/api-types": "*"
+    "@grpc-vs-rest/api-types": "*",
+    "typescript": "^4.9.5"
   }
 }
