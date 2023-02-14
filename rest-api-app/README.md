@@ -34,3 +34,10 @@ npm run dev:client
 ```console
 curl http://localhost:9090/contacts
 ```
+
+5. Visit the address book front end app
+
+```url
+http://localhost:5173
+
+```
