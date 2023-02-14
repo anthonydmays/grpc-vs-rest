@@ -1,0 +1,4 @@
+version: v1
+name: buf.build/@grpc-vs-rest/apiTypes
+deps:
+  - buf.build/googleapis/googleapis

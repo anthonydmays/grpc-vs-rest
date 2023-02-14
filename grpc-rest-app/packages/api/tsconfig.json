@@ -1,0 +1,17 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "rootDir": "./src",
+    "target": "esnext",
+    "module": "node16",
+    "moduleResolution": "node16",
+    "resolveJsonModule": true,
+    "outDir": "./dist"
+  },
+  "include": ["src/**/*", "src/**/*.json"],
+  "references": [
+    {
+      "path": "../apiTypes/tsconfig.json"
+    }
+  ]
+}

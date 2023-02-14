@@ -1,0 +1,36 @@
+{
+  "name": "@grpc-vs-rest/api-types",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./dist/cjs/index.js",
+  "type": "module",
+  "types": "./dist/types/index.d.ts",
+  "exports": {
+    "import": "./dist/esm/index.js",
+    "require": "./dist/cjs/index.js",
+    "types": "./dist/types/index.d.ts"
+  },
+  "files": [
+    "dist/**/"
+  ],
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "scripts": {
+    "gen": "buf generate",
+    "clean": "rm -rf ./dist/cjs/* ./dist/esm/* ./dist/types/*",
+    "build": "npm run build:cjs && npm run build:esm+types && buf build -o ../proxy/contacts.pb --as-file-descriptor-set",
+    "build:cjs": "../../node_modules/typescript/bin/tsc --project tsconfig.json --module commonjs --outDir ./dist/cjs && echo >./dist/cjs/package.json '{\"type\":\"commonjs\"}'",
+    "build:esm+types": "../../node_modules/typescript/bin/tsc --project tsconfig.json --module esnext --outDir ./dist/esm --declaration --declarationDir ./dist/types"
+  },
+  "devDependencies": {
+    "@bufbuild/buf": "^1.14.0",
+    "@bufbuild/protoc-gen-connect-web": "^0.7.0",
+    "@bufbuild/protoc-gen-es": "^1.0.0",
+    "typescript": "^5.0.0-dev.20230211"
+  },
+  "dependencies": {
+    "@bufbuild/protobuf": "^1.0.0",
+    "googleapis": "^111.0.0"
+  }
+}

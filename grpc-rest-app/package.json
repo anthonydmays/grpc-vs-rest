@@ -1,0 +1,19 @@
+{
+  "name": "@grpc-vs-rest/rest-api-app",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "tsc --build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@grpc-vs-rest/api-types": "*",
+    "typescript": "^4.9.5"
+  }
+}

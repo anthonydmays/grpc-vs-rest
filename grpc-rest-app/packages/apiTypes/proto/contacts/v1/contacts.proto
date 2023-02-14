@@ -1,0 +1,63 @@
+syntax = "proto3";
+
+package proto.contacts.v1;
+
+import "google/api/annotations.proto";
+
+service ContactsService {
+  rpc ListContacts(ListContactsRequest) returns (ListContactsResponse) {
+    option (google.api.http) = {
+      get: "/v1/contacts"
+    };
+  }
+
+  rpc GetContact(GetContactRequest) returns (GetContactResponse) {
+    option (google.api.http) = {
+      get: "/v1/contacts/{id}"
+    };
+  }
+
+  rpc UpdateContact(UpdateContactRequest) returns (UpdateContactResponse) {
+    option (google.api.http) = {
+      put: "/v1/contacts/{uri}"
+      body: "contact"
+    };
+  }
+}
+
+message ListContactsRequest {
+  int32 page_size = 1;
+  int32 page_number = 2;
+  string order_by = 3;
+}
+
+message ListContactsResponse {
+  repeated Contact contacts = 1;
+  int32 page_size = 2;
+  int32 page_number = 3;
+  string order_by = 4;
+  int32 total_count = 5;
+}
+
+message GetContactRequest {
+  string uri = 1;
+}
+
+message GetContactResponse {
+  Contact contact = 1;
+}
+
+message UpdateContactRequest {
+  Contact contact = 1;
+}
+
+message UpdateContactResponse {
+  Contact contact = 1;
+}
+
+message Contact {
+    string uri = 1;
+    string first_name = 2;
+    string last_name = 3;
+    string email = 4;
+}
