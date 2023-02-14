@@ -3,6 +3,9 @@ services:
   envoy:
     image: envoyproxy/envoy-dev:c7c462fa4c10b7a71edd57ab2029619e752f4b2b
     network_mode: "host"
+    ports:
+      - "9901:9901"
+      - "8080:8080"
     volumes:
       - ./envoy.yaml:/etc/envoy/envoy.yaml
       - ./contacts.pb:/tmp/envoy/contacts.pb
