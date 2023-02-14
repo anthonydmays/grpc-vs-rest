@@ -1,20 +1,12 @@
 import { env } from '$env/dynamic/private';
-import {
-	createGrpcTransport,
-	createPromiseClient,
-	type PromiseClient
-} from '@bufbuild/connect-node';
-import { ContactsService, GetContactResponse, type Contact } from '@grpc-vs-rest/api-types';
+import type { Contact, GetContactResponse } from '@grpc-vs-rest/api-types';
 import { redirect } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
 
 export const load = (async ({ fetch, url, params }) => {
-	const client = getApiClient();
-
 	const uri = url.searchParams.get('uri') || '';
-	const res: GetContactResponse = await client.getContact({
-		uri
-	});
+
+	const res = (await (await fetch(getContactUrl(uri))).json()) as GetContactResponse;
 
 	return { ...res.contact };
 }) satisfies PageServerLoad;
@@ -29,22 +21,20 @@ export const actions = {
 		contact.email = String(data.get('email'));
 		contact.uri = String(data.get('uri'));
 
-		const client = getApiClient();
-
-		const res = await client.updateContact({
-			contact
+		await fetch(getContactUrl(contact.uri), {
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(contact)
 		});
 
 		throw redirect(303, '/');
 	}
 } satisfies Actions;
 
-function getApiClient(): PromiseClient<typeof ContactsService> {
-	const baseUrl = env.API_ENDPOINT || 'http://localhost:9090';
-
-	const transport = createGrpcTransport({
-		httpVersion: '2',
-		baseUrl
-	});
-	return createPromiseClient(ContactsService, transport);
+function getContactUrl(uri: string): string {
+	const baseUrl = env.API_ENDPOINT || 'http://0.0.0.0:8080/v1/contacts';
+	const id = uri.replace('contacts/', '');
+	return `${baseUrl}/${id}`;
 }
