@@ -19,7 +19,7 @@ service ContactsService {
 
   rpc UpdateContact(UpdateContactRequest) returns (UpdateContactResponse) {
     option (google.api.http) = {
-      put: "/v1/contacts/{uri}"
+      put: "/v1/contacts/{id}"
       body: "contact"
     };
   }
@@ -40,7 +40,7 @@ message ListContactsResponse {
 }
 
 message GetContactRequest {
-  string uri = 1;
+  string id = 1;
 }
 
 message GetContactResponse {
@@ -48,7 +48,8 @@ message GetContactResponse {
 }
 
 message UpdateContactRequest {
-  Contact contact = 1;
+  string id = 1;
+  Contact contact = 2;
 }
 
 message UpdateContactResponse {

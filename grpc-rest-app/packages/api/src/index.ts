@@ -24,16 +24,22 @@ const handlers = createHandlers(ContactsService, {
     };
   },
   getContact(req) {
-    const contact = getContact(req.uri);
+    const contact = getContact(`contacts/${req.id}`);
     return { contact };
   },
   updateContact(req) {
-    if (!req.contact?.uri || !getContact(req.contact.uri)) {
+    if (!req.id) {
       throw new Error('Contact not found.');
     }
 
-    updateContact(req.contact.uri, req.contact);
-    const contact = getContact(req.contact.uri);
+    if (!req.contact) {
+      throw new Error('Property "contact" missing from request.');
+    }
+
+    const uri = `contacts/${req.id}`;
+
+    updateContact(uri, req.contact!);
+    const contact = getContact(uri);
     return { contact };
   },
 });

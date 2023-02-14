@@ -9,6 +9,3 @@ plugins:
     path: ../../node_modules/.bin/protoc-gen-connect-web
     opt: target=ts
     out: src
-  - name: descriptor_set
-    out: ../../proxy/gen/contacts.pb
-    strategy: directory

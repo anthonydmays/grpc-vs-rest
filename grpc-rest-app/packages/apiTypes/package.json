@@ -19,7 +19,7 @@
   "scripts": {
     "gen": "buf generate",
     "clean": "rm -rf ./dist/cjs/* ./dist/esm/* ./dist/types/*",
-    "build": "npm run build:cjs && npm run build:esm+types && buf build -o ../proxy/contacts.pb --as-file-descriptor-set",
+    "build": "npm run gen && npm run build:cjs && npm run build:esm+types && buf build -o ../proxy/contacts.pb --as-file-descriptor-set",
     "build:cjs": "../../node_modules/typescript/bin/tsc --project tsconfig.json --module commonjs --outDir ./dist/cjs && echo >./dist/cjs/package.json '{\"type\":\"commonjs\"}'",
     "build:esm+types": "../../node_modules/typescript/bin/tsc --project tsconfig.json --module esnext --outDir ./dist/esm --declaration --declarationDir ./dist/types"
   },

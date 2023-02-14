@@ -121,9 +121,9 @@ export class ListContactsResponse extends Message<ListContactsResponse> {
  */
 export class GetContactRequest extends Message<GetContactRequest> {
   /**
-   * @generated from field: string uri = 1;
+   * @generated from field: string id = 1;
    */
-  uri = "";
+  id = "";
 
   constructor(data?: PartialMessage<GetContactRequest>) {
     super();
@@ -133,7 +133,7 @@ export class GetContactRequest extends Message<GetContactRequest> {
   static readonly runtime = proto3;
   static readonly typeName = "proto.contacts.v1.GetContactRequest";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "uri", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 1, name: "id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetContactRequest {
@@ -195,7 +195,12 @@ export class GetContactResponse extends Message<GetContactResponse> {
  */
 export class UpdateContactRequest extends Message<UpdateContactRequest> {
   /**
-   * @generated from field: proto.contacts.v1.Contact contact = 1;
+   * @generated from field: string id = 1;
+   */
+  id = "";
+
+  /**
+   * @generated from field: proto.contacts.v1.Contact contact = 2;
    */
   contact?: Contact;
 
@@ -207,7 +212,8 @@ export class UpdateContactRequest extends Message<UpdateContactRequest> {
   static readonly runtime = proto3;
   static readonly typeName = "proto.contacts.v1.UpdateContactRequest";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "contact", kind: "message", T: Contact },
+    { no: 1, name: "id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "contact", kind: "message", T: Contact },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UpdateContactRequest {
