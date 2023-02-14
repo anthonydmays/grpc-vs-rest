@@ -7,7 +7,10 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "tsc --build"
+    "build:apiTypes": "cd packages/apiTypes && npm run build",
+    "dev:api": "cd packages/api && npm run dev",
+    "dev:proxy": "cd packages/proxy && docker compose up",
+    "dev:client": "cd packages/client && npm run dev"
   },
   "keywords": [],
   "author": "",
