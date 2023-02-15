@@ -2,7 +2,7 @@
 
 ## Description
 
-A basic address book app built using a REST API on Express and a Svelte frontend.
+A basic address book app built using a gRPC API backend and a Svelte frontend.
 
 ## Prerequisites
 
