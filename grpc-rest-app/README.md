@@ -33,7 +33,7 @@ npm run dev:client
 
 ```console
 cd packages/proxy
-docker compose up  # or add -d to run detached
+docker compose up
 ```
 
 5. You can test that the API is running properly browing to the following link:
