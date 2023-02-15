@@ -9,4 +9,5 @@ services:
       - "host.docker.internal:host-gateway"
     volumes:
       - ./envoy.yaml:/etc/envoy/envoy.yaml
-      - ./contacts.pb:/tmp/envoy/contacts.pb
+      - ./tmp/envoy/contacts.pb:/tmp/envoy/contacts.pb
+

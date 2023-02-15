@@ -60,7 +60,7 @@ static_resources:
       type: strict_dns
       http2_protocol_options: {}
       lb_policy: round_robin
-      # win/mac hosts: Use address: host.docker.internal instead of address: localhost in the line below
+      # Use address: 0.0.0.0 when running with Envoy directly.
       load_assignment:
         cluster_name: cluster_0
         endpoints:
