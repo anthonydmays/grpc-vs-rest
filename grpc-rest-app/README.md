@@ -42,7 +42,7 @@ docker compose up
 5. You can test that the API is running properly browing to the following link:
 
 ```url
-http://localhost:9090/v1/contacts
+http://localhost:8080/v1/contacts
 ```
 
 6. Visit the address book front end app
