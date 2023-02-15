@@ -7,6 +7,7 @@ A basic address book app built using a gRPC API exposed via a REST-like endpoint
 ## Prerequisites
 
 - Node v18 or above
+- Docker (if you have trouble running the envoy Docker image, you can install Envoy directly)
 
 ## Running the demo
 
@@ -35,6 +36,8 @@ npm run dev:client
 cd packages/proxy
 docker compose up
 ```
+
+> :warning: If you get 500 errors when testing the client, it may be that you're running Docker on Mac which will require configuration changes. See below for instructions, or install Envoy directly and run the configuration by executing `envoy -c envoy.yaml`.
 
 5. You can test that the API is running properly browing to the following link:
 
