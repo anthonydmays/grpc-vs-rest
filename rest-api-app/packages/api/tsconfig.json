@@ -6,9 +6,11 @@
     "module": "node16",
     "moduleResolution": "node16",
     "resolveJsonModule": true,
-    "outDir": "./dist"
+    "outDir": "./dist",
+    "types": ["node", "jest"]
   },
   "include": ["src/**/*", "src/**/*.json"],
+  "exclude": ["**/*.test.*", "**/tests/*"],
   "references": [
     {
       "path": "../apiTypes/tsconfig.json"

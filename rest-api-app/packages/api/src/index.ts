@@ -17,7 +17,7 @@ import { getContactLinks, getPagingLinks } from './links.js';
 
 dotenv.config();
 
-const app = express();
+export const app = express();
 const port = process.env.PORT || 9090;
 
 app.use(json());
@@ -39,6 +39,7 @@ app.get('/v1/contacts', (req, res: Response<GetContactsResponse>) => {
     pageSize,
     pageNumber,
     totalCount,
+    orderBy,
   };
 
   // Assemble links providing options for client to navigate between pages of
