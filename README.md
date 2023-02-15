@@ -2,7 +2,7 @@
 
 ## Description
 
-This repo contains three fullstack monorepos demonstrating the REST and gRPC API architectural styles. See the README in each of the subprojects for instructions on how to run each demo.
+This repo contains three full-stack monorepos demonstrating the REST and gRPC API architectural styles. See the README in each of the subprojects for instructions on how to run each demo.
 
 ## Author
 
