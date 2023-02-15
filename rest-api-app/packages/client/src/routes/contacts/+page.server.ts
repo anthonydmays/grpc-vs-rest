@@ -1,7 +1,8 @@
+import type { Contact, GetContactResponse } from '@grpc-vs-rest/api-types';
 import { error, redirect } from '@sveltejs/kit';
-import type { PageServerLoad, Actions } from './$types';
-import type { GetContactResponse, Contact } from '@grpc-vs-rest/api-types';
+import type { Actions, PageServerLoad } from './$types';
 
+/** Handles loading data for the page. */
 export const load = (async ({ fetch, url, params }) => {
 	const res = (await (await fetch(`${url.searchParams.get('url')}`)).json()) as GetContactResponse;
 
@@ -12,6 +13,7 @@ export const load = (async ({ fetch, url, params }) => {
 	throw error(404, 'Not found');
 }) satisfies PageServerLoad;
 
+/** Handles saving updated contact information. */
 export const actions = {
 	default: async ({ fetch, request, params }) => {
 		const data = await request.formData();

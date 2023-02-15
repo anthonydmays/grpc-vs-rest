@@ -3,6 +3,7 @@ import type { Contact, GetContactResponse } from '@grpc-vs-rest/api-types';
 import { redirect } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
 
+/** Handles loading data for the page. */
 export const load = (async ({ fetch, url, params }) => {
 	const uri = url.searchParams.get('uri') || '';
 
@@ -11,6 +12,7 @@ export const load = (async ({ fetch, url, params }) => {
 	return { ...res.contact };
 }) satisfies PageServerLoad;
 
+/** Handles saving updated contact information. */
 export const actions = {
 	default: async ({ fetch, request, params }) => {
 		const data = await request.formData();
