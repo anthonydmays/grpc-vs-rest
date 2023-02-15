@@ -23,7 +23,7 @@ export function getContacts(opts: {
 }): Contact[] {
   const { pageSize, pageNumber, orderBy } = opts;
   return _(db.data?.contacts)
-    .orderBy([orderBy || 'lastName'])
+    .orderBy([orderBy])
     .drop(pageSize * pageNumber)
     .take(pageSize)
     .value();

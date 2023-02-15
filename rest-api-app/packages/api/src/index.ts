@@ -30,7 +30,7 @@ app.get('/', (req, res) => {
 app.get('/v1/contacts', (req, res: Response<GetContactsResponse>) => {
   const pageSize = Number(req.query.pageSize) || 25;
   const pageNumber = Number(req.query.pageNumber) || 0;
-  const orderBy = String(req.query.orderBy) || 'lastName';
+  const orderBy = String(req.query.orderBy);
   const totalCount = getContactsCount();
 
   // Assemble list of contacts and paging information.
