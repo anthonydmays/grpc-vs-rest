@@ -49,16 +49,4 @@ http://localhost:8080/v1/contacts
 
 ```url
 http://localhost:5173
-
 ```
-
-## Troubleshooting Docker on Mac/Windows
-
-If you receive 500 errors when running the client or accessing the API, it may be because the Docker container is configured to use `network_mode: HOST` which [doesn't work as expected](https://github.com/docker/roadmap/issues/238) on Mac/Windows native. Fortunately, you can update the configuration files for the proxy server to get everything working.
-
-Note that if you're using Windows, you can use the [Windows Subsystem for Linux](https://learn.microsoft.com/en-us/windows/wsl/install) which supports the Docker configuration by default.
-
-1. If the container is running, bring it down using `docker compose down`.
-2. In [packages/proxy/docker-compose.yaml](packages/proxy/docker-compose.yaml), change the `network_mode` setting to `BRIDGE`.
-3. In [packages/proxy/envoy.yaml](packages/proxy/envoy.yaml), change the address value at the bottom of the file for the `contacts_service` config from `address: 0.0.0.0` to `address: host.docker.internal`.
-4. Bring up the Docker container and confirm that the client or API is working as expected.
