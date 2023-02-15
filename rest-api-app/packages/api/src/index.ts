@@ -24,10 +24,10 @@ app.use(json());
 app.use(cors());
 
 app.get('/', (req, res) => {
-  res.redirect('/contacts');
+  res.redirect('/v1/contacts');
 });
 
-app.get('/contacts', (req, res: Response<GetContactsResponse>) => {
+app.get('/v1/contacts', (req, res: Response<GetContactsResponse>) => {
   const pageSize = Number(req.query.pageSize) || 25;
   const pageNumber = Number(req.query.pageNumber) || 0;
   const orderBy = String(req.query.orderBy) || 'lastName';
@@ -64,9 +64,9 @@ function getContactResources(
 }
 
 app.get(
-  '/contacts/:id',
+  '/v1/contacts/:id',
   (req, res: Response<GetContactResponse | ErrorResponse>) => {
-    const uri = req.path.slice(1);
+    const uri = req.path.slice(4);
     const contact = getContact(uri);
 
     // If the contact isn't found, return the not found status.
@@ -84,9 +84,9 @@ app.get(
 );
 
 app.put(
-  '/contacts/:id',
+  '/v1/contacts/:id',
   (req, res: Response<GetContactResponse | ErrorResponse>) => {
-    const uri = req.path.slice(1);
+    const uri = req.path.slice(4);
 
     if (!getContact(uri)) {
       res.status(404);

@@ -83,5 +83,5 @@ export function getContactLinks(
 }
 
 function getBaseUrl(req: Request): string {
-  return `${req.protocol}://${req.get('host')}/contacts`;
+  return `${req.protocol}://${req.get('host')}/v1/contacts`;
 }
