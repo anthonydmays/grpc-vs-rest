@@ -29,13 +29,20 @@ npm run dev:api
 npm run dev:client
 ```
 
-4. You can test that the API is running properly browing to the following link:
+4. In a new window, run the proxy server on Docker.
+
+```console
+cd packages/proxy
+docker compose up  # or add -d to run detached
+```
+
+5. You can test that the API is running properly browing to the following link:
 
 ```url
 http://localhost:9090/v1/contacts
 ```
 
-5. Visit the address book front end app
+6. Visit the address book front end app
 
 ```url
 http://localhost:5173
