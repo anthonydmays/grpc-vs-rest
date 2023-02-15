@@ -1,4 +1,4 @@
-# gRPC Rest App
+# gRPC REST App
 
 ## Description
 
