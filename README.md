@@ -22,4 +22,4 @@ The following is a description of the projects you can demo.
 
 These demos were presented at Hacking With The Homies Developer Conference (HWTHDC) 2023 by Anthony D. Mays in the session entitled "gRPC vs REST" on February 23, 2023.
 
-This session was also sponsored by [Brilliant Black Minds](https://ml.tips/brilliant-black-minds). Black engineers in the US can sign up now to get free mock technical interviews, free workshopsp, and a Discord community.
+This session was also sponsored by [Brilliant Black Minds](https://ml.tips/brilliant-black-minds). Black engineers in the US can sign up now to get free mock technical interviews, free workshops, and a Discord community.

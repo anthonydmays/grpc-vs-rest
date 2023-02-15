@@ -9,6 +9,7 @@ type DbData = {
   contacts: Contact[];
 };
 
+// Load the contacts database from the local JSON file.
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const file = join(__dirname, 'contacts.json');
 const adapter = new JSONFile<DbData>(file);
