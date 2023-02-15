@@ -37,7 +37,7 @@ cd packages/proxy
 docker compose up
 ```
 
-> :warning: If you get 500 errors when testing the client or API, it may be that you're running Docker on Mac/Windows which will require configuration changes. See [below for instructions](#troubleshooting-docker-on-macwindows), or [install Envoy](https://www.envoyproxy.io/docs/envoy/latest/start/install) directly and run the configuration by executing `envoy -c envoy.yaml`.
+> :warning: If you get 500 errors when testing the client or API, you can [install Envoy](https://www.envoyproxy.io/docs/envoy/latest/start/install) directly and run the configuration by executing `envoy -c envoy.yaml`.
 
 5. You can test that the API is running properly browing to the following link:
 
