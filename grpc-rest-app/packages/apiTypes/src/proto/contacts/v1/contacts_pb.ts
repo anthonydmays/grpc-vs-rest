@@ -7,6 +7,8 @@ import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialM
 import { Message, proto3 } from "@bufbuild/protobuf";
 
 /**
+ * Describes a ListContacts request with paging information.
+ *
  * @generated from message proto.contacts.v1.ListContactsRequest
  */
 export class ListContactsRequest extends Message<ListContactsRequest> {
@@ -56,6 +58,8 @@ export class ListContactsRequest extends Message<ListContactsRequest> {
 }
 
 /**
+ * Describes a ListContacts response with paging information.
+ *
  * @generated from message proto.contacts.v1.ListContactsResponse
  */
 export class ListContactsResponse extends Message<ListContactsResponse> {
@@ -117,6 +121,8 @@ export class ListContactsResponse extends Message<ListContactsResponse> {
 }
 
 /**
+ * Describes a GetContact request.
+ *
  * @generated from message proto.contacts.v1.GetContactRequest
  */
 export class GetContactRequest extends Message<GetContactRequest> {
@@ -154,6 +160,8 @@ export class GetContactRequest extends Message<GetContactRequest> {
 }
 
 /**
+ * Describes a GetContact response.
+ *
  * @generated from message proto.contacts.v1.GetContactResponse
  */
 export class GetContactResponse extends Message<GetContactResponse> {
@@ -191,6 +199,8 @@ export class GetContactResponse extends Message<GetContactResponse> {
 }
 
 /**
+ * Describes an UpdateContact request.
+ *
  * @generated from message proto.contacts.v1.UpdateContactRequest
  */
 export class UpdateContactRequest extends Message<UpdateContactRequest> {
@@ -234,6 +244,8 @@ export class UpdateContactRequest extends Message<UpdateContactRequest> {
 }
 
 /**
+ * Describes an UpdateContact response.
+ *
  * @generated from message proto.contacts.v1.UpdateContactResponse
  */
 export class UpdateContactResponse extends Message<UpdateContactResponse> {
@@ -271,6 +283,8 @@ export class UpdateContactResponse extends Message<UpdateContactResponse> {
 }
 
 /**
+ * An individual contact item.
+ *
  * @generated from message proto.contacts.v1.Contact
  */
 export class Contact extends Message<Contact> {

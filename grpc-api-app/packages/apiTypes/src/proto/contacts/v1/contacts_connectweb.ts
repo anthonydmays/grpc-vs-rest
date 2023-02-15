@@ -7,12 +7,16 @@ import { GetContactRequest, GetContactResponse, ListContactsRequest, ListContact
 import { MethodKind } from "@bufbuild/protobuf";
 
 /**
+ * An API for managing a collection of contacts.
+ *
  * @generated from service proto.contacts.v1.ContactsService
  */
 export const ContactsService = {
   typeName: "proto.contacts.v1.ContactsService",
   methods: {
     /**
+     * List all available contacts.
+     *
      * @generated from rpc proto.contacts.v1.ContactsService.ListContacts
      */
     listContacts: {
@@ -22,6 +26,8 @@ export const ContactsService = {
       kind: MethodKind.Unary,
     },
     /**
+     * Retrieves a specific contact.
+     *
      * @generated from rpc proto.contacts.v1.ContactsService.GetContact
      */
     getContact: {
@@ -31,6 +37,8 @@ export const ContactsService = {
       kind: MethodKind.Unary,
     },
     /**
+     * Updates a contact with the provided information.
+     *
      * @generated from rpc proto.contacts.v1.ContactsService.UpdateContact
      */
     updateContact: {
