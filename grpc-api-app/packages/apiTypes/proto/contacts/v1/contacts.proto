@@ -2,20 +2,27 @@ syntax = "proto3";
 
 package proto.contacts.v1;
 
+// An API for managing a collection of contacts.
 service ContactsService {
+
+  // List all available contacts.
   rpc ListContacts(ListContactsRequest) returns (ListContactsResponse);
 
+  // Retrieves a specific contact.
   rpc GetContact(GetContactRequest) returns (GetContactResponse);
 
+  // Updates a contact with the provided information.
   rpc UpdateContact(UpdateContactRequest) returns (UpdateContactResponse);
 }
 
+// Describes a ListContacts request with paging information.
 message ListContactsRequest {
   int32 page_size = 1;
   int32 page_number = 2;
   string order_by = 3;
 }
 
+// Describes a ListContacts response with paging information.
 message ListContactsResponse {
   repeated Contact contacts = 1;
   int32 page_size = 2;
@@ -24,22 +31,27 @@ message ListContactsResponse {
   int32 total_count = 5;
 }
 
+// Describes a GetContact request.
 message GetContactRequest {
   string uri = 1;
 }
 
+// Describes a GetContact response.
 message GetContactResponse {
   Contact contact = 1;
 }
 
+// Describes an UpdateContact request.
 message UpdateContactRequest {
   Contact contact = 1;
 }
 
+// Describes an UpdateContact response.
 message UpdateContactResponse {
   Contact contact = 1;
 }
 
+// An individual contact item.
 message Contact {
     string uri = 1;
     string first_name = 2;
