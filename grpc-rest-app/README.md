@@ -54,7 +54,7 @@ http://localhost:5173
 
 ## Troubleshooting Docker on Mac/Windows
 
-If you receive 500 errors when running the client or accessing the API, it's because the Docker container is configured to use `network_mode: HOST` which [doesn't work as expected on Mac/Windows native](https://github.com/docker/roadmap/issues/238). Fortunately, you can update the configuration files for the proxy server to get everything working.
+If you receive 500 errors when running the client or accessing the API, it's because the Docker container is configured to use `network_mode: HOST` which [doesn't work as expected](https://github.com/docker/roadmap/issues/238) on Mac/Windows native. Fortunately, you can update the configuration files for the proxy server to get everything working.
 
 Note that if you're using Windows, you can use the [Windows Subsystem for Linux](https://learn.microsoft.com/en-us/windows/wsl/install) which supports the Docker configuration by default.
 
