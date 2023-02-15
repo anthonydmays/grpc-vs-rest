@@ -12,11 +12,11 @@ Anthony D. Mays (@anthonydmays) - [Twitter](https://twitter.com/anthonydmays) | 
 
 The following is a description of the projects you can demo.
 
-| Project                           | Description                                                                                |
-| --------------------------------- | ------------------------------------------------------------------------------------------ |
-| **[rest-api-app](rest-api-app/)** | Address book app built using a REST API built on Express and a Svelte fronted.             |
-| **grpc-api-app**                  | Address book app built using a gRPC API.                                                   |
-| **grpc-rest-app**                 | Address book app built using a gRPC API with a REST endpoint using an Envoy reverse proxy. |
+| Project                             | Description                                                                                |
+| ----------------------------------- | ------------------------------------------------------------------------------------------ |
+| **[rest-api-app](rest-api-app/)**   | Address book app built using a REST API built on Express and a Svelte fronted.             |
+| **[grpc-api-app](grpc-api-app/)**   | Address book app built using a gRPC API.                                                   |
+| **[grpc-rest-app](grpc-rest-app/)** | Address book app built using a gRPC API with a REST endpoint using an Envoy reverse proxy. |
 
 ## Acknowledgements
 
