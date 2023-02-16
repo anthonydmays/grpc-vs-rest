@@ -43,6 +43,15 @@ export function updateContact(uri: string, contact: Contact) {
   db.data!.contacts[index] = { ...oldContact, ...contact, uri };
 }
 
+export function deleteContact(uri: string) {
+  const index = db.data?.contacts.findIndex((c) => c.uri === uri) ?? -1;
+  if (index < 0) {
+    throw new Error('Contact not found');
+  }
+
+  db.data!.contacts.splice(index, 1);
+}
+
 export function getContactsCount(): number {
   return db.data?.contacts.length || 0;
 }

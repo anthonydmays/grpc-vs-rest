@@ -78,6 +78,10 @@ export function getContactLinks(
       href: getBaseUrl(req),
       type: 'GET',
     };
+    _links['delete'] = {
+      href: urlJoin(getBaseUrl(req), uri.replace('contacts/', '')),
+      type: 'DELETE',
+    };
   }
   return _links;
 }

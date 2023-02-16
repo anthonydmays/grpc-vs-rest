@@ -24,8 +24,9 @@
 	<a href="/">{'<'} Back to all contacts</a>
 </nav>
 
-<form method="post">
+<form method="post" action="?/update">
 	<input name="url" type="hidden" bind:value={data.resource._links['self'].href} />
+	<input name="deleteUrl" type="hidden" bind:value={data.resource._links['delete'].href} />
 	<div class="field">
 		<label for="firstName">First Name</label>
 		<input name="firstName" type="text" bind:value={data.resource.firstName} />
@@ -39,4 +40,5 @@
 		<input name="email" type="email" bind:value={data.resource.email} />
 	</div>
 	<button type="submit">Save contact</button>
+	<button type="submit" formaction="?/delete">Delete contact</button>
 </form>

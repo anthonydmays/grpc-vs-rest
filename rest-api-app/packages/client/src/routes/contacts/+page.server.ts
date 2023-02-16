@@ -15,7 +15,7 @@ export const load = (async ({ fetch, url, params }) => {
 
 /** Handles saving updated contact information. */
 export const actions = {
-	default: async ({ fetch, request, params }) => {
+	update: async ({ fetch, request, params }) => {
 		const data = await request.formData();
 
 		const contact: Partial<Contact> = {};
@@ -31,6 +31,19 @@ export const actions = {
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify(contact)
+		});
+
+		throw redirect(303, '/');
+	},
+	delete: async ({ fetch, request, params }) => {
+		const data = await request.formData();
+		const deleteUrl = String(data.get('deleteUrl'));
+
+		await fetch(`${deleteUrl}`, {
+			method: 'DELETE',
+			headers: {
+				'Content-Type': 'application/json'
+			}
 		});
 
 		throw redirect(303, '/');

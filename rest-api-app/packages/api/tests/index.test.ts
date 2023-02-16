@@ -103,6 +103,7 @@ describe('API', () => {
     const res = await request(app).get('/v1/contacts/184');
 
     expect(res.header['content-type']).toMatch(/json/);
+    expect(res.status).toBe(200);
     expect(res.body._links).not.toBeDefined();
     expect(res.body.resource._links).toBeDefined();
     expect(res.body.resource._links.self).toEqual(
@@ -117,9 +118,23 @@ describe('API', () => {
         type: 'GET',
       }),
     );
+    expect(res.body.resource._links.delete).toEqual(
+      objectContaining({
+        href: stringMatching(/\/v1\/contacts\/184$/),
+        type: 'DELETE',
+      }),
+    );
     expect(res.body.resource.firstName).toBe('Malachi');
     expect(res.body.resource.lastName).toBe('Klehn');
     expect(res.body.resource.email).toBe('mklehn53@pcworld.com');
+  });
+
+  it('should GET non-existent contact with 404', async () => {
+    const res = await request(app).get('/v1/contacts/doesnotexist');
+
+    expect(res.header['content-type']).toMatch(/json/);
+    expect(res.status).toBe(404);
+    expect(res.body).toEqual({ message: 'Contact not found' });
   });
 
   it('should PUT a contact', async () => {
@@ -130,6 +145,7 @@ describe('API', () => {
     });
 
     expect(res.header['content-type']).toMatch(/json/);
+    expect(res.status).toBe(200);
     expect(res.body._links).toBeDefined();
     expect(res.body._links.self).toEqual(
       objectContaining({
@@ -150,5 +166,27 @@ describe('API', () => {
         email: 'somenew@email.com',
       }),
     );
+  });
+
+  it('should PUT a non-existent contact with 404', async () => {
+    const res = await request(app)
+      .put('/v1/contacts/doesnotexist')
+      .send({ lastName: 'whoCares' });
+
+    expect(res.header['content-type']).toMatch(/json/);
+    expect(res.status).toBe(404);
+    expect(res.body).toEqual({ message: 'Contact not found' });
+  });
+
+  it('should DELETE a contact', async () => {
+    const res = await request(app).delete('/v1/contacts/174');
+
+    expect(res.header['content-type']).toMatch(/json/);
+    expect(res.status).toBe(200);
+    expect(res.body.resource).toBeUndefined();
+    expect(res.body._links).not.toBeDefined();
+
+    const getRes = request(app).get('/v1/contacts/174');
+    expect((await getRes).status).toBe(404);
   });
 });

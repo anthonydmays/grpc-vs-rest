@@ -1,4 +1,5 @@
 import {
+  ApiResponse,
   Contact,
   ErrorResponse,
   GetContactResponse,
@@ -8,6 +9,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import express, { json, Request, Response } from 'express';
 import {
+  deleteContact,
   getContact,
   getContacts,
   getContactsCount,
@@ -111,6 +113,26 @@ app.put(
     const _links = getContactLinks(req, uri);
 
     res.json({ resource, _links });
+  },
+);
+
+app.delete(
+  '/v1/contacts/:id',
+  (req, res: Response<ApiResponse | ErrorResponse>) => {
+    const uri = req.path.slice(4);
+    const contact = getContact(uri);
+
+    // If the contact isn't found, return the not found status.
+    if (!contact) {
+      res.status(404);
+      res.json({ message: 'Contact not found' });
+      return;
+    }
+
+    // Delete the contact.
+    deleteContact(uri);
+
+    res.json({ resource: undefined });
   },
 );
 
