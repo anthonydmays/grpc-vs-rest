@@ -6,6 +6,7 @@ import {
 import { ContactsService } from '@grpc-vs-rest/api-types';
 import http2 from 'http2';
 import {
+  deleteContact,
   getContact,
   getContacts,
   getContactsCount,
@@ -27,7 +28,10 @@ export const contactsServiceImpl: ServiceImpl<typeof ContactsService> = {
     };
   },
   getContact(req) {
-    const contact = getContact(req.id);
+    const contact = getContact(`contacts/${req.id}`);
+    if (!contact) {
+      throw new Error('Contact not found');
+    }
     return { contact };
   },
   updateContact(req) {
@@ -39,14 +43,22 @@ export const contactsServiceImpl: ServiceImpl<typeof ContactsService> = {
     const contact = getContact(req.contact.uri);
     return { contact };
   },
+  deleteContact(req) {
+    if (!req.id || !getContact(`contacts/${req.id}`)) {
+      throw new Error('Contact not found.');
+    }
+
+    deleteContact(`contacts/${req.id}`);
+
+    return {};
+  },
 };
 
+// Create gRPC handlers.
 const handlers = createHandlers(ContactsService, contactsServiceImpl);
 
-if (typeof jest === undefined) {
-  http2
-    .createServer({}, mergeHandlers(handlers))
-    .listen(9090, () =>
-      console.log(`⚡️[server]: Server is running at http://localhost:9090`),
-    );
-}
+http2
+  .createServer({}, mergeHandlers(handlers))
+  .listen(9090, () =>
+    console.log(`⚡️[server]: Server is running at http://localhost:9090`),
+  );

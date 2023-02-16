@@ -283,6 +283,45 @@ export class UpdateContactResponse extends Message<UpdateContactResponse> {
 }
 
 /**
+ * Describes a DeleteContact request.
+ *
+ * @generated from message proto.contacts.v1.DeleteContactRequest
+ */
+export class DeleteContactRequest extends Message<DeleteContactRequest> {
+  /**
+   * @generated from field: string id = 1;
+   */
+  id = "";
+
+  constructor(data?: PartialMessage<DeleteContactRequest>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime = proto3;
+  static readonly typeName = "proto.contacts.v1.DeleteContactRequest";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DeleteContactRequest {
+    return new DeleteContactRequest().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DeleteContactRequest {
+    return new DeleteContactRequest().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DeleteContactRequest {
+    return new DeleteContactRequest().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: DeleteContactRequest | PlainMessage<DeleteContactRequest> | undefined, b: DeleteContactRequest | PlainMessage<DeleteContactRequest> | undefined): boolean {
+    return proto3.util.equals(DeleteContactRequest, a, b);
+  }
+}
+
+/**
  * An individual contact item.
  *
  * @generated from message proto.contacts.v1.Contact

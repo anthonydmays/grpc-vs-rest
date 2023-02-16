@@ -3,6 +3,7 @@ syntax = "proto3";
 package proto.contacts.v1;
 
 import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
 
 // An API for managing a collection of contacts.
 service ContactsService {
@@ -26,6 +27,13 @@ service ContactsService {
     option (google.api.http) = {
       put: "/v1/contacts/{id}"
       body: "contact"
+    };
+  }
+
+  // Deletes a contact with the provided id.
+  rpc DeleteContact(DeleteContactRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/v1/contacts/{id}"
     };
   }
 }
@@ -65,6 +73,11 @@ message UpdateContactRequest {
 // Describes an UpdateContact response.
 message UpdateContactResponse {
   Contact contact = 1;
+}
+
+// Describes a DeleteContact request.
+message DeleteContactRequest {
+  string id = 1;
 }
 
 // An individual contact item.
