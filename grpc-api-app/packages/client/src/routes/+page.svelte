@@ -20,14 +20,14 @@
 </style>
 
 <nav>
-	<a href="/">{'<<'}</a> |
+	<a href="?orderBy={data.orderBy}">{'<<'}</a> |
 	{#if data.pageNumber > 0}
-		<a href="?pageNumber={data.pageNumber - 1}">{'<'}</a>  |
+		<a href="?orderBy={data.orderBy}&pageNumber={data.pageNumber - 1}">{'<'}</a>  |
 	{/if}
 	{#if hasNextPage}
-		<a href="?pageNumber={data.pageNumber + 1}">{'>'}</a>  |
+		<a href="?orderBy={data.orderBy}&pageNumber={data.pageNumber + 1}">{'>'}</a>  |
 	{/if}
-	<a href="?pageNumber={lastPage}">{'>>'}</a>
+	<a href="?orderBy={data.orderBy}&pageNumber={lastPage}">{'>>'}</a>
 </nav>
 
 <div class="orderby">

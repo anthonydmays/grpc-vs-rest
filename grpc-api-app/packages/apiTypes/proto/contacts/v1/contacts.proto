@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package proto.contacts.v1;
 
+import "google/protobuf/empty.proto";
+
 // An API for managing a collection of contacts.
 service ContactsService {
 
@@ -13,6 +15,9 @@ service ContactsService {
 
   // Updates a contact with the provided information.
   rpc UpdateContact(UpdateContactRequest) returns (UpdateContactResponse);
+
+  // Deletes a contact with the provided id.
+  rpc DeleteContact(DeleteContactRequest) returns (google.protobuf.Empty);
 }
 
 // Describes a ListContacts request with paging information.
@@ -49,6 +54,11 @@ message UpdateContactRequest {
 // Describes an UpdateContact response.
 message UpdateContactResponse {
   Contact contact = 1;
+}
+
+// Describes a DeleteContact request.
+message DeleteContactRequest {
+  string uri = 1;
 }
 
 // An individual contact item.

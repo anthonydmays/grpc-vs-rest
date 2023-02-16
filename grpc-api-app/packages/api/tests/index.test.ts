@@ -1,5 +1,6 @@
 import { HandlerContext } from '@bufbuild/connect-node';
 import {
+  DeleteContactRequest,
   GetContactRequest,
   ListContactsRequest,
   UpdateContactRequest,
@@ -9,15 +10,13 @@ import { describe } from 'node:test';
 import { contactsServiceImpl } from '../src/index';
 
 const { objectContaining, stringMatching } = expect;
+const DEFAULT_CONTEXT = {} as HandlerContext;
 
 describe('API', () => {
   it('should list contacts', async () => {
     const req = new ListContactsRequest();
 
-    const res = await contactsServiceImpl.listContacts(
-      req,
-      {} as HandlerContext,
-    );
+    const res = await contactsServiceImpl.listContacts(req, DEFAULT_CONTEXT);
 
     // Expect a JSON response.
     expect(res.pageNumber).toBe(0);
@@ -60,7 +59,7 @@ describe('API', () => {
       uri: 'contacts/184',
     });
 
-    const res = await contactsServiceImpl.getContact(req, {} as HandlerContext);
+    const res = await contactsServiceImpl.getContact(req, DEFAULT_CONTEXT);
 
     expect(res.contact?.firstName).toBe('Malachi');
     expect(res.contact?.lastName).toBe('Klehn');
@@ -77,10 +76,7 @@ describe('API', () => {
       },
     });
 
-    const res = await contactsServiceImpl.updateContact(
-      req,
-      {} as HandlerContext,
-    );
+    const res = await contactsServiceImpl.updateContact(req, DEFAULT_CONTEXT);
 
     expect(res.contact).toEqual(
       objectContaining({
@@ -89,5 +85,22 @@ describe('API', () => {
         email: 'somenew@email.com',
       }),
     );
+  });
+
+  it('should delete a contact', async () => {
+    const req = new DeleteContactRequest({
+      uri: 'contacts/72',
+    });
+
+    const res = await contactsServiceImpl.deleteContact(req, DEFAULT_CONTEXT);
+
+    expect(res).toEqual({});
+
+    expect(() =>
+      contactsServiceImpl.getContact(
+        new GetContactRequest({ uri: 'contacts/72' }),
+        DEFAULT_CONTEXT,
+      ),
+    ).toThrow();
   });
 });

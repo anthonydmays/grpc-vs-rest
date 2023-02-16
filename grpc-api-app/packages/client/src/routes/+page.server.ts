@@ -6,7 +6,7 @@ import type { PageServerLoad } from './$types';
 export const load = (async ({ fetch, url, params }) => {
 	const baseUrl = env.API_ENDPOINT || 'http://localhost:9090';
 	const pageNumber = Number(url.searchParams.get('pageNumber')) || 0;
-	const orderBy = url.searchParams.get('orderBy') || 'lastName';
+	const orderBy = url.searchParams.get('orderBy') || '';
 
 	const transport = createGrpcTransport({
 		httpVersion: '2',

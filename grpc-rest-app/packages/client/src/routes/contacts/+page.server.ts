@@ -35,11 +35,9 @@ export const actions = {
 	},
 	delete: async ({ fetch, request, params }) => {
 		const data = await request.formData();
+		const uri = String(data.get('uri'));
 
-		const contact: Partial<Contact> = {};
-		contact.uri = String(data.get('uri'));
-
-		await fetch(getContactUrl(contact.uri), {
+		await fetch(getContactUrl(uri), {
 			method: 'DELETE',
 			headers: {
 				'Content-Type': 'application/json'

@@ -3,8 +3,8 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { GetContactRequest, GetContactResponse, ListContactsRequest, ListContactsResponse, UpdateContactRequest, UpdateContactResponse } from "./contacts_pb.js";
-import { MethodKind } from "@bufbuild/protobuf";
+import { DeleteContactRequest, GetContactRequest, GetContactResponse, ListContactsRequest, ListContactsResponse, UpdateContactRequest, UpdateContactResponse } from "./contacts_pb.js";
+import { Empty, MethodKind } from "@bufbuild/protobuf";
 
 /**
  * An API for managing a collection of contacts.
@@ -45,6 +45,17 @@ export const ContactsService = {
       name: "UpdateContact",
       I: UpdateContactRequest,
       O: UpdateContactResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * Deletes a contact with the provided id.
+     *
+     * @generated from rpc proto.contacts.v1.ContactsService.DeleteContact
+     */
+    deleteContact: {
+      name: "DeleteContact",
+      I: DeleteContactRequest,
+      O: Empty,
       kind: MethodKind.Unary,
     },
   }

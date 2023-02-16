@@ -22,7 +22,7 @@ export const load = (async ({ fetch, url, params }) => {
 
 /** Handles saving updated contact information. */
 export const actions = {
-	default: async ({ fetch, request, params }) => {
+	update: async ({ fetch, request, params }) => {
 		const data = await request.formData();
 
 		const contact: Partial<Contact> = {};
@@ -36,6 +36,15 @@ export const actions = {
 		const res = await client.updateContact({
 			contact
 		});
+
+		throw redirect(303, '/');
+	},
+	delete: async ({ fetch, request, params }) => {
+		const data = await request.formData();
+		const uri = String(data.get('uri'));
+
+		const client = getApiClient();
+		const res = await client.deleteContact({ uri });
 
 		throw redirect(303, '/');
 	}

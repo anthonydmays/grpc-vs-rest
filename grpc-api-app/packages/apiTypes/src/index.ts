@@ -1,5 +1,6 @@
 export {
   Contact,
+  DeleteContactRequest,
   GetContactRequest,
   GetContactResponse,
   ListContactsRequest,
