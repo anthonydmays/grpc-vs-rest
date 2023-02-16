@@ -3,7 +3,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { DeleteContactRequest, GetContactRequest, GetContactResponse, ListContactsRequest, ListContactsResponse, UpdateContactRequest, UpdateContactResponse } from "./contacts_pb.js";
+import { CreateContactRequest, CreateContactResponse, DeleteContactRequest, GetContactRequest, GetContactResponse, ListContactsRequest, ListContactsResponse, UpdateContactRequest, UpdateContactResponse } from "./contacts_pb.js";
 import { Empty, MethodKind } from "@bufbuild/protobuf";
 
 /**
@@ -56,6 +56,17 @@ export const ContactsService = {
       name: "DeleteContact",
       I: DeleteContactRequest,
       O: Empty,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * Creates a contact.
+     *
+     * @generated from rpc proto.contacts.v1.ContactsService.CreateContact
+     */
+    createContact: {
+      name: "CreateContact",
+      I: CreateContactRequest,
+      O: CreateContactResponse,
       kind: MethodKind.Unary,
     },
   }

@@ -18,6 +18,9 @@ service ContactsService {
 
   // Deletes a contact with the provided id.
   rpc DeleteContact(DeleteContactRequest) returns (google.protobuf.Empty);
+
+  // Creates a contact.
+  rpc CreateContact(CreateContactRequest) returns (CreateContactResponse);
 }
 
 // Describes a ListContacts request with paging information.
@@ -59,6 +62,16 @@ message UpdateContactResponse {
 // Describes a DeleteContact request.
 message DeleteContactRequest {
   string uri = 1;
+}
+
+// Describes a CreateContact request.
+message CreateContactRequest {
+  Contact contact = 1;
+}
+
+// Describes a CreateContact response.
+message CreateContactResponse {
+  Contact contact = 1;
 }
 
 // An individual contact item.

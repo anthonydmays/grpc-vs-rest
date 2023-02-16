@@ -24,7 +24,9 @@
 	<a href="/">{'<'} Back to all contacts</a>
 </nav>
 <form method="post" action="?/update">
-	<input name="uri" type="hidden" bind:value={data.uri} />
+	{#if data.uri}
+		<input name="uri" type="hidden" bind:value={data.uri} />
+	{/if}
 	<div class="field">
 		<label for="firstName">First Name</label>
 		<input name="firstName" type="text" bind:value={data.firstName} />
@@ -38,5 +40,7 @@
 		<input name="email" type="text" bind:value={data.email} />
 	</div>
 	<button type="submit">Save contact</button>
-	<button type="submit" formaction="?/delete">Delete contact</button>
+	{#if data.uri}
+		<button type="submit" formaction="?/delete">Delete contact</button>
+	{/if}
 </form>

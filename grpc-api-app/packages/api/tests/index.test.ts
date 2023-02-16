@@ -1,5 +1,6 @@
 import { HandlerContext } from '@bufbuild/connect-node';
 import {
+  CreateContactRequest,
   DeleteContactRequest,
   GetContactRequest,
   ListContactsRequest,
@@ -64,6 +65,27 @@ describe('API', () => {
     expect(res.contact?.firstName).toBe('Malachi');
     expect(res.contact?.lastName).toBe('Klehn');
     expect(res.contact?.email).toBe('mklehn53@pcworld.com');
+  });
+
+  it('should create a contact', async () => {
+    const req = new CreateContactRequest({
+      contact: {
+        firstName: 'Anthony',
+        lastName: 'Mays',
+        email: 'my@email.com',
+      },
+    });
+
+    const res = await contactsServiceImpl.createContact(req, DEFAULT_CONTEXT);
+
+    expect(res.contact).toEqual(
+      objectContaining({
+        uri: 'contacts/208',
+        firstName: 'Anthony',
+        lastName: 'Mays',
+        email: 'my@email.com',
+      }),
+    );
   });
 
   it('should update a contact', async () => {

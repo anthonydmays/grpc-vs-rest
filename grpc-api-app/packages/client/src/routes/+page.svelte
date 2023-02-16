@@ -14,7 +14,7 @@
 		font-size: 1.2em;
 	}
 
-	nav, .orderby {
+	nav, .orderby, .create {
 		margin-bottom: 16px;
 	}
 </style>
@@ -35,6 +35,10 @@
 	<a href="?orderBy=firstName">First name</a>  |
 	<a href="?orderBy=lastName">Last name</a>  |
 	<a href="?orderBy=email">Email</a>
+</div>
+
+<div class="create">
+	<a href="contacts">Create new contact</a>
 </div>
 
 <table>

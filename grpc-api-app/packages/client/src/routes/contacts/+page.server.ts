@@ -10,6 +10,10 @@ import type { Actions, PageServerLoad } from './$types';
 
 /** Handles loading data for the page. */
 export const load = (async ({ fetch, url, params }) => {
+	if (!url.searchParams.get('uri')) {
+		return {};
+	}
+
 	const client = getApiClient();
 
 	const uri = url.searchParams.get('uri') || '';
@@ -29,13 +33,15 @@ export const actions = {
 		contact.firstName = String(data.get('firstName'));
 		contact.lastName = String(data.get('lastName'));
 		contact.email = String(data.get('email'));
-		contact.uri = String(data.get('uri'));
+		contact.uri = String(data.get('uri') || '');
 
 		const client = getApiClient();
 
-		const res = await client.updateContact({
-			contact
-		});
+		if (contact.uri) {
+			await client.updateContact({ contact });
+		} else {
+			await client.createContact({ contact });
+		}
 
 		throw redirect(303, '/');
 	},
@@ -44,6 +50,7 @@ export const actions = {
 		const uri = String(data.get('uri'));
 
 		const client = getApiClient();
+
 		const res = await client.deleteContact({ uri });
 
 		throw redirect(303, '/');

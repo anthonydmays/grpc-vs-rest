@@ -316,6 +316,84 @@ export class DeleteContactRequest extends Message<DeleteContactRequest> {
 }
 
 /**
+ * Describes a CreateContact request.
+ *
+ * @generated from message proto.contacts.v1.CreateContactRequest
+ */
+export class CreateContactRequest extends Message<CreateContactRequest> {
+  /**
+   * @generated from field: proto.contacts.v1.Contact contact = 1;
+   */
+  contact?: Contact;
+
+  constructor(data?: PartialMessage<CreateContactRequest>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime = proto3;
+  static readonly typeName = "proto.contacts.v1.CreateContactRequest";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "contact", kind: "message", T: Contact },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CreateContactRequest {
+    return new CreateContactRequest().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CreateContactRequest {
+    return new CreateContactRequest().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CreateContactRequest {
+    return new CreateContactRequest().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: CreateContactRequest | PlainMessage<CreateContactRequest> | undefined, b: CreateContactRequest | PlainMessage<CreateContactRequest> | undefined): boolean {
+    return proto3.util.equals(CreateContactRequest, a, b);
+  }
+}
+
+/**
+ * Describes a CreateContact response.
+ *
+ * @generated from message proto.contacts.v1.CreateContactResponse
+ */
+export class CreateContactResponse extends Message<CreateContactResponse> {
+  /**
+   * @generated from field: proto.contacts.v1.Contact contact = 1;
+   */
+  contact?: Contact;
+
+  constructor(data?: PartialMessage<CreateContactResponse>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime = proto3;
+  static readonly typeName = "proto.contacts.v1.CreateContactResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "contact", kind: "message", T: Contact },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CreateContactResponse {
+    return new CreateContactResponse().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CreateContactResponse {
+    return new CreateContactResponse().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CreateContactResponse {
+    return new CreateContactResponse().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: CreateContactResponse | PlainMessage<CreateContactResponse> | undefined, b: CreateContactResponse | PlainMessage<CreateContactResponse> | undefined): boolean {
+    return proto3.util.equals(CreateContactResponse, a, b);
+  }
+}
+
+/**
  * An individual contact item.
  *
  * @generated from message proto.contacts.v1.Contact
