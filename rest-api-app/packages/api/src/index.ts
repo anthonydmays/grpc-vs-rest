@@ -5,7 +5,6 @@ import {
   GetContactResponse,
   GetContactsResponse,
 } from '@grpc-vs-rest/api-types';
-import cors from 'cors';
 import dotenv from 'dotenv';
 import express, { json, Request, Response } from 'express';
 import {
@@ -24,7 +23,12 @@ export const app = express();
 const port = process.env.PORT || 9090;
 
 app.use(json());
-app.use(cors());
+
+// Permit cross-domain requests for demo purposes.
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  next();
+});
 
 app.get('/', (req, res) => {
   res.redirect('/v1/contacts');

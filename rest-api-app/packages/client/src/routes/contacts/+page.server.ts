@@ -45,9 +45,6 @@ export const actions = {
 		if (isNew) {
 			contactUrl = String(data.get('createUrl'));
 		}
-		console.log('create url is', data.get('createUrl'));
-
-		console.log('saving contact to', contactUrl);
 
 		await fetch(`${contactUrl}`, {
 			method: isNew ? 'POST' : 'PUT',
