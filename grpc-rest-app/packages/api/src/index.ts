@@ -1,4 +1,8 @@
-import { createHandlers, mergeHandlers } from '@bufbuild/connect-node';
+import {
+  createHandlers,
+  mergeHandlers,
+  ServiceImpl,
+} from '@bufbuild/connect-node';
 import { ContactsService } from '@grpc-vs-rest/api-types';
 import http2 from 'http2';
 import {
@@ -8,12 +12,11 @@ import {
   updateContact,
 } from './contacts.js';
 
-const handlers = createHandlers(ContactsService, {
+export const contactsServiceImpl: ServiceImpl<typeof ContactsService> = {
   listContacts(req) {
     let { pageNumber, pageSize, orderBy } = req;
-    pageSize = pageSize ?? 25;
+    pageSize = pageSize || 25;
     pageNumber = pageNumber ?? 0;
-    orderBy = orderBy || 'lastName';
     const contacts = getContacts({ pageNumber, pageSize, orderBy });
     return {
       contacts,
@@ -24,28 +27,26 @@ const handlers = createHandlers(ContactsService, {
     };
   },
   getContact(req) {
-    const contact = getContact(`contacts/${req.id}`);
+    const contact = getContact(req.id);
     return { contact };
   },
   updateContact(req) {
-    if (!req.id) {
+    if (!req.contact?.uri || !getContact(req.contact.uri)) {
       throw new Error('Contact not found.');
     }
 
-    if (!req.contact) {
-      throw new Error('Property "contact" missing from request.');
-    }
-
-    const uri = `contacts/${req.id}`;
-
-    updateContact(uri, req.contact!);
-    const contact = getContact(uri);
+    updateContact(req.contact.uri, req.contact);
+    const contact = getContact(req.contact.uri);
     return { contact };
   },
-});
+};
 
-http2
-  .createServer({}, mergeHandlers(handlers))
-  .listen(9090, () =>
-    console.log(`⚡️[server]: Server is running at http://localhost:9090`),
-  );
+const handlers = createHandlers(ContactsService, contactsServiceImpl);
+
+if (typeof jest === undefined) {
+  http2
+    .createServer({}, mergeHandlers(handlers))
+    .listen(9090, () =>
+      console.log(`⚡️[server]: Server is running at http://localhost:9090`),
+    );
+}
