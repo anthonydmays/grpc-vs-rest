@@ -14,6 +14,10 @@ export function getPagingLinks(opts: {
       type: 'GET',
       href: getPagingUrl(req, pageNumber),
     },
+    create: {
+      type: 'POST',
+      href: getBaseUrl(req),
+    },
     firstPage: {
       type: 'GET',
       href: getPagingUrl(req, 0),
@@ -73,7 +77,8 @@ export function getContactLinks(
       type: 'GET',
     },
   };
-  if (req.params['id']) {
+  // If we requested a specific contact or created a new one, then add self action links.
+  if (req.params['id'] || req.method === 'POST') {
     _links['allContacts'] = {
       href: getBaseUrl(req),
       type: 'GET',

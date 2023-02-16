@@ -9,6 +9,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import express, { json, Request, Response } from 'express';
 import {
+  createContact,
   deleteContact,
   getContact,
   getContacts,
@@ -111,6 +112,24 @@ app.put(
     };
 
     const _links = getContactLinks(req, uri);
+
+    res.json({ resource, _links });
+  },
+);
+
+app.post(
+  '/v1/contacts',
+  (req, res: Response<GetContactResponse | ErrorResponse>) => {
+    const contact = req.body as Contact;
+
+    const newContact = createContact(contact);
+
+    const resource = {
+      ...newContact,
+      _links: getContactLinks(req, newContact.uri),
+    };
+
+    const _links = getContactLinks(req, resource.uri);
 
     res.json({ resource, _links });
   },

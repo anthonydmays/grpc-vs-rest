@@ -137,6 +137,38 @@ describe('API', () => {
     expect(res.body).toEqual({ message: 'Contact not found' });
   });
 
+  it('should POST a contact', async () => {
+    const res = await request(app).post('/v1/contacts').send({
+      firstName: 'Anthony',
+      lastName: 'Mays',
+      email: 'my@email.com',
+    });
+
+    expect(res.header['content-type']).toMatch(/json/);
+    expect(res.status).toBe(200);
+    expect(res.body._links).toBeDefined();
+    expect(res.body._links.self).toEqual(
+      objectContaining({
+        href: stringMatching(/\/v1\/contacts\/208$/),
+        type: 'GET',
+      }),
+    );
+    expect(res.body._links.allContacts).toEqual(
+      objectContaining({
+        href: stringMatching(/\/v1\/contacts$/),
+        type: 'GET',
+      }),
+    );
+    expect(res.body.resource).toEqual(
+      objectContaining({
+        uri: 'contacts/208',
+        firstName: 'Anthony',
+        lastName: 'Mays',
+        email: 'my@email.com',
+      }),
+    );
+  });
+
   it('should PUT a contact', async () => {
     const res = await request(app).put('/v1/contacts/184').send({
       firstName: 'Malachai',

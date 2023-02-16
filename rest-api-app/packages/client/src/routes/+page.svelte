@@ -12,7 +12,7 @@
 		font-size: 1.2em;
 	}
 
-	nav, .orderby {
+	nav, .orderby, .create {
 		margin-bottom: 16px;
 	}
 </style>
@@ -44,6 +44,12 @@
 		<a href="?url={encodeURIComponent(data._links.orderByEmail.href)}">Email</a>
 	{/if}
 </div>
+
+{#if data._links?.create}
+	<div class="create">
+		<a href="contacts?createUrl={encodeURIComponent(data._links.create.href)}">Create new contact</a>
+	</div>
+{/if}
 
 <table>
 	{#each data.resource.list as contact}
