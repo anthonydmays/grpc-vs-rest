@@ -6,6 +6,7 @@ import {
 import { ContactsService } from '@grpc-vs-rest/api-types';
 import http2 from 'http2';
 import {
+  createContact,
   deleteContact,
   getContact,
   getContacts,
@@ -51,6 +52,15 @@ export const contactsServiceImpl: ServiceImpl<typeof ContactsService> = {
     deleteContact(`contacts/${req.id}`);
 
     return {};
+  },
+  createContact(req) {
+    if (!req.contact) {
+      throw new Error('Must provide a contact to create.');
+    }
+
+    const contact = createContact(req.contact!);
+
+    return { contact };
   },
 };
 

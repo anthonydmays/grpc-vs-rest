@@ -29,6 +29,17 @@ export function getContacts(opts: {
     .value();
 }
 
+export function createContact(contact: Contact) {
+  const uri = `contacts/${getNextContactId()}`;
+  const newContact = { ...contact, uri } as Contact;
+  db.data?.contacts.push(newContact);
+  return newContact;
+}
+
+function getNextContactId() {
+  return (db.data?.contacts.length || 0) + 1;
+}
+
 export function getContact(uri: string): Contact | undefined {
   return _(db.data?.contacts).find((c) => c.uri === uri);
 }

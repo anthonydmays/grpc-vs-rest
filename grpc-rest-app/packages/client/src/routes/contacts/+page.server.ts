@@ -7,6 +7,10 @@ import type { Actions, PageServerLoad } from './$types';
 export const load = (async ({ fetch, url, params }) => {
 	const uri = url.searchParams.get('uri') || '';
 
+	if (!uri) {
+		return {};
+	}
+
 	const res = (await (await fetch(getContactUrl(uri))).json()) as GetContactResponse;
 
 	return { ...res.contact };
@@ -21,10 +25,13 @@ export const actions = {
 		contact.firstName = String(data.get('firstName'));
 		contact.lastName = String(data.get('lastName'));
 		contact.email = String(data.get('email'));
-		contact.uri = String(data.get('uri'));
+		contact.uri = String(data.get('uri') || '');
 
-		await fetch(getContactUrl(contact.uri), {
-			method: 'PUT',
+		const isNew = !contact.uri;
+		const endpointUrl = isNew ? getBaseUrl() : getContactUrl(contact.uri);
+
+		await fetch(endpointUrl, {
+			method: isNew ? 'POST' : 'PUT',
 			headers: {
 				'Content-Type': 'application/json'
 			},
@@ -49,7 +56,11 @@ export const actions = {
 } satisfies Actions;
 
 function getContactUrl(uri: string): string {
-	const baseUrl = env.API_ENDPOINT || 'http://0.0.0.0:8080/v1/contacts';
+	const baseUrl = getBaseUrl();
 	const id = uri.replace('contacts/', '');
 	return `${baseUrl}/${id}`;
+}
+
+function getBaseUrl(): string {
+	return env.API_ENDPOINT || 'http://0.0.0.0:8080/v1/contacts';
 }

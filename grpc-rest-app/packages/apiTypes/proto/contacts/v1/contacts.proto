@@ -36,6 +36,14 @@ service ContactsService {
       delete: "/v1/contacts/{id}"
     };
   }
+
+  // Creates a contact.
+  rpc CreateContact(CreateContactRequest) returns (CreateContactResponse) {
+    option (google.api.http) = {
+      post: "/v1/contacts"
+      body: "contact"
+    };
+  };
 }
 
 // Describes a ListContacts request with paging information.
@@ -78,6 +86,16 @@ message UpdateContactResponse {
 // Describes a DeleteContact request.
 message DeleteContactRequest {
   string id = 1;
+}
+
+// Describes a CreateContact request.
+message CreateContactRequest {
+  Contact contact = 1;
+}
+
+// Describes a CreateContact response.
+message CreateContactResponse {
+  Contact contact = 1;
 }
 
 // An individual contact item.
