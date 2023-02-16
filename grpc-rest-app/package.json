@@ -8,6 +8,7 @@
   ],
   "scripts": {
     "build:apiTypes": "cd packages/apiTypes && npm run build",
+    "test:api": "cd packages/api && npm run test",
     "dev:api": "cd packages/api && npm run dev",
     "dev:proxy": "cd packages/proxy && docker compose up",
     "dev:client": "cd packages/client && npm run dev"
