@@ -25,12 +25,13 @@
   },
   "devDependencies": {
     "@bufbuild/buf": "^1.14.0",
+    "@grpc/grpc-js": "^1.8.9",
     "@protobuf-ts/plugin": "^2.8.2",
+    "grpc-web": "^1.4.2",
     "typescript": "^5.0.0-dev.20230211"
   },
   "dependencies": {
     "@bufbuild/protobuf": "^1.0.0",
-    "@grpc/grpc-js": "^1.8.9",
     "googleapis": "^111.0.0"
   }
 }

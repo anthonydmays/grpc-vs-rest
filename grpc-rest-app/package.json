@@ -19,5 +19,9 @@
   "dependencies": {
     "@grpc-vs-rest/api-types": "*",
     "typescript": "^4.9.5"
+  },
+  "devDependencies": {
+    "@bufbuild/protoc-gen-connect-web": "^0.7.0",
+    "@bufbuild/protoc-gen-es": "^1.0.0"
   }
 }

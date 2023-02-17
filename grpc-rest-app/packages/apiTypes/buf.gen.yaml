@@ -4,4 +4,9 @@ plugins:
   - name: ts
     out: src/
     opt: generate_dependencies,long_type_string,server_grpc1,client_grpc1
-    path: ../../node_modules/@protobuf-ts/plugin/bin/protoc-gen-ts
+  - plugin: es
+    out: src/
+    opt: target=ts
+  - plugin: connect-web
+    out: src/
+    opt: target=ts
