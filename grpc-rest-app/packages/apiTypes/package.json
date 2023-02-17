@@ -11,7 +11,7 @@
     "types": "./dist/types/index.d.ts"
   },
   "files": [
-    "dist/**/"
+    "dist/**/*"
   ],
   "keywords": [],
   "author": "",
@@ -31,7 +31,6 @@
     "typescript": "^5.0.0-dev.20230211"
   },
   "dependencies": {
-    "@bufbuild/protobuf": "^1.0.0",
-    "googleapis": "^111.0.0"
+    "@bufbuild/protobuf": "^1.0.0"
   }
 }

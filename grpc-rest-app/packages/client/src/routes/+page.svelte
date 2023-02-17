@@ -20,7 +20,7 @@
 </style>
 
 <nav>
-	<a href="/?orderBy={data.orderBy}">{'<<'}</a> |
+	<a href="?orderBy={data.orderBy}">{'<<'}</a> |
 	{#if data.pageNumber > 0}
 		<a href="?orderBy={data.orderBy}&pageNumber={data.pageNumber - 1}">{'<'}</a> |
 	{/if}

@@ -51,7 +51,7 @@ export function updateContact(uri: string, contact: Contact) {
   }
 
   const oldContact = db.data!.contacts[index];
-  db.data!.contacts[index] = { ...oldContact, ...contact, uri } as Contact;
+  db.data!.contacts[index] = { ...oldContact, ...contact, uri };
 }
 
 export function deleteContact(uri: string) {

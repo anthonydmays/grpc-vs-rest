@@ -3,7 +3,7 @@
 
 	export let data: PageData;
 	const hasNextPage = data.pageSize * (data.pageNumber + 1) < data.totalCount;
-	const lastPage = Math.floor(data.totalCount / (data.pageSize || 25))
+	const lastPage = Math.floor(data.totalCount / (data.pageSize || 25));
 </script>
 
 <style>
@@ -22,18 +22,18 @@
 <nav>
 	<a href="?orderBy={data.orderBy}">{'<<'}</a> |
 	{#if data.pageNumber > 0}
-		<a href="?orderBy={data.orderBy}&pageNumber={data.pageNumber - 1}">{'<'}</a>  |
+		<a href="?orderBy={data.orderBy}&pageNumber={data.pageNumber - 1}">{'<'}</a> |
 	{/if}
 	{#if hasNextPage}
-		<a href="?orderBy={data.orderBy}&pageNumber={data.pageNumber + 1}">{'>'}</a>  |
+		<a href="?orderBy={data.orderBy}&pageNumber={data.pageNumber + 1}">{'>'}</a> |
 	{/if}
 	<a href="?orderBy={data.orderBy}&pageNumber={lastPage}">{'>>'}</a>
 </nav>
 
 <div class="orderby">
 	Order by:
-	<a href="?orderBy=firstName">First name</a>  |
-	<a href="?orderBy=lastName">Last name</a>  |
+	<a href="?orderBy=firstName">First name</a> |
+	<a href="?orderBy=lastName">Last name</a> |
 	<a href="?orderBy=email">Email</a>
 </div>
 

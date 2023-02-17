@@ -58,13 +58,11 @@ export class ContactsService implements api.IContactsService {
     request: api.DeleteContactRequest,
     context: ServerCallContext,
   ): Promise<api.Empty> {
-    const req = request;
-
-    if (!req.id || !getContact(`contacts/${req.id}`)) {
+    if (!request.id || !getContact(`contacts/${request.id}`)) {
       throw new Error('Contact not found.');
     }
 
-    deleteContact(`contacts/${req.id}`);
+    deleteContact(`contacts/${request.id}`);
 
     return {};
   }

@@ -25,8 +25,8 @@
   },
   "devDependencies": {
     "@bufbuild/buf": "^1.14.0",
-    "grpc_tools_node_protoc_ts": "^5.3.3",
-    "grpc-tools": "^1.12.4",
+    "@grpc/grpc-js": "^1.8.9",
+    "@protobuf-ts/plugin": "^2.8.2",
     "typescript": "^5.0.0-dev.20230211"
   },
   "dependencies": {

@@ -1,4 +1,4 @@
-import type { Contact } from '@grpc-vs-rest/api-types';
+import { Contact } from '@grpc-vs-rest/api-types';
 import _ from 'lodash';
 import { Low } from 'lowdb';
 import { JSONFile } from 'lowdb/node';
@@ -51,7 +51,6 @@ export function updateContact(uri: string, contact: Contact) {
   }
 
   const oldContact = db.data!.contacts[index];
-  // @ts-ignore
   db.data!.contacts[index] = { ...oldContact, ...contact, uri };
 }
 
