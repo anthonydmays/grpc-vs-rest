@@ -1,12 +1,7 @@
 import api = require('@grpc-vs-rest/api-types');
-import {
-  handleUnaryCall,
-  Server,
-  ServerCredentials,
-  UntypedHandleCall,
-} from '@grpc/grpc-js';
-import { Status } from '@grpc/grpc-js/build/src/constants.js';
-import { Empty } from 'apiTypes/dist/cjs/google/protobuf/empty.js';
+import { Server, ServerCredentials } from '@grpc/grpc-js';
+import { adaptService } from '@protobuf-ts/grpc-backend';
+import { ServerCallContext } from '@protobuf-ts/runtime-rpc';
 import {
   createContact,
   deleteContact,
@@ -18,75 +13,64 @@ import {
 const server = new Server();
 
 export class ContactsService implements api.IContactsService {
-  [name: string]: UntypedHandleCall;
-
-  listContacts: handleUnaryCall<
-    api.ListContactsRequest,
-    api.ListContactsResponse
-  > = (call, callback) => {
-    let { pageNumber, pageSize, orderBy } = call.request;
+  async listContacts(
+    request: api.ListContactsRequest,
+    context: ServerCallContext,
+  ): Promise<api.ListContactsResponse> {
+    let { pageNumber, pageSize, orderBy } = request;
     pageSize = pageSize || 25;
     pageNumber = pageNumber ?? 0;
     const contacts = getContacts({ pageNumber, pageSize, orderBy });
 
-    callback(null, {
+    return {
       contacts,
       pageNumber,
       pageSize,
       orderBy,
       totalCount: getContactsCount(),
-    });
-  };
-
-  getContact: handleUnaryCall<api.GetContactRequest, api.GetContactResponse> = (
-    call,
-    callback,
-  ) => {
-    const contact = getContact(call.request.uri);
+    };
+  }
+  async getContact(
+    request: api.GetContactRequest,
+    context: ServerCallContext,
+  ): Promise<api.GetContactResponse> {
+    const contact = getContact(request.uri);
     if (!contact) {
-      callback({ code: Status.NOT_FOUND, details: 'Contact not found.' }, null);
-      return;
+      throw new Error('Contact not found.');
     }
-    callback(null, { contact });
-  };
-
-  updateContact: handleUnaryCall<
-    api.UpdateContactRequest,
-    api.UpdateContactResponse
-  > = (call, callback) => {
-    const req = call.request;
+    return { contact };
+  }
+  async updateContact(
+    request: api.UpdateContactRequest,
+    context: ServerCallContext,
+  ): Promise<api.UpdateContactResponse> {
+    const req = request;
 
     if (!req.contact?.uri || !getContact(req.contact.uri)) {
-      callback({ code: Status.NOT_FOUND, details: 'Contact not found.' }, null);
-      return;
+      throw new Error('Contact not found.');
     }
 
     updateContact(req.contact.uri, req.contact);
     const contact = getContact(req.contact.uri);
-    return callback(null, { contact });
-  };
-
-  deleteContact: handleUnaryCall<api.DeleteContactRequest, Empty> = (
-    call,
-    callback,
-  ) => {
-    const req = call.request;
-
-    if (!req.uri || !getContact(req.uri)) {
-      callback({ code: Status.NOT_FOUND, details: 'Contact not found.' }, null);
-      return;
+    return { contact };
+  }
+  async deleteContact(
+    request: api.DeleteContactRequest,
+    context: ServerCallContext,
+  ): Promise<api.Empty> {
+    if (!request.uri || !getContact(request.uri)) {
+      throw new Error('Contact not found.');
     }
 
-    deleteContact(req.uri);
+    deleteContact(request.uri);
 
-    callback(null, {});
-  };
-
-  createContact: handleUnaryCall<
-    api.CreateContactRequest,
-    api.CreateContactResponse
-  > = (call, callback) => {
-    const update = call.request.contact;
+    return {};
+  }
+  async createContact(
+    request: api.CreateContactRequest,
+    context: ServerCallContext,
+  ): Promise<api.CreateContactResponse> {
+    const update = request.contact;
 
     if (!update) {
       throw new Error('Must provide a contact to create.');
@@ -94,15 +78,17 @@ export class ContactsService implements api.IContactsService {
 
     const contact = createContact(update!);
 
-    return callback(null, { contact });
-  };
+    return { contact };
+  }
 }
 
 if (!process.env.DISABLE_SERVER_FOR_TESTS) {
   server.bindAsync('0.0.0.0:9090', ServerCredentials.createInsecure(), () => {
     server.start();
 
-    server.addService(api.contactsServiceDefinition, new ContactsService());
+    server.addService(
+      ...adaptService(api.ContactsService, new ContactsService()),
+    );
 
     console.log('server is running on 0.0.0.0:9090');
   });

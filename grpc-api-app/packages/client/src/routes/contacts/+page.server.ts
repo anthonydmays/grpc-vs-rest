@@ -1,11 +1,7 @@
 import { env } from '$env/dynamic/private';
-import {
-	Contact,
-	ContactsServiceClient,
-	CreateContactResponse,
-	type GetContactResponse
-} from '@grpc-vs-rest/api-types';
-import { credentials } from '@grpc/grpc-js';
+import { Contact, ContactsServiceClient } from '@grpc-vs-rest/api-types';
+import { ChannelCredentials } from '@grpc/grpc-js';
+import { GrpcTransport } from '@protobuf-ts/grpc-transport';
 import { redirect } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
 
@@ -18,19 +14,11 @@ export const load = (async ({ fetch, url, params }) => {
 
 	const client = getApiClient();
 
-	const res = await new Promise<GetContactResponse | undefined>((resolve, reject) =>
-		client.getContact(
-			{
-				uri
-			},
-			(err, res) => {
-				if (err) reject(err);
-				else resolve(res);
-			}
-		)
-	);
+	const call = await client.getContact({
+		uri
+	});
 
-	return { ...res!.contact };
+	return { ...call.response.contact };
 }) satisfies PageServerLoad;
 
 /** Handles saving updated contact information. */
@@ -48,9 +36,9 @@ export const actions = {
 		const client = getApiClient();
 
 		if (contact.uri) {
-			await updateContact(contact);
+			await client.updateContact({ contact });
 		} else {
-			await createContact(contact);
+			await client.createContact({ contact });
 		}
 
 		throw redirect(303, '/');
@@ -60,59 +48,17 @@ export const actions = {
 		const uri = String(data.get('uri'));
 
 		const client = getApiClient();
-
-		const res = await deleteContact(uri);
+		await client.deleteContact({ uri });
 
 		throw redirect(303, '/');
 	}
 } satisfies Actions;
 
-function updateContact(contact: Contact) {
-	const client = getApiClient();
-	return new Promise<GetContactResponse | undefined>((resolve, reject) =>
-		client.updateContact(
-			{
-				contact
-			},
-			(err, res) => {
-				if (err) reject(err);
-				else resolve(res);
-			}
-		)
-	);
-}
-
-function createContact(contact: Contact) {
-	const client = getApiClient();
-	return new Promise<CreateContactResponse | undefined>((resolve, reject) =>
-		client.createContact(
-			{
-				contact
-			},
-			(err, res) => {
-				if (err) reject(err);
-				else resolve(res);
-			}
-		)
-	);
-}
-
-function deleteContact(uri: string) {
-	const client = getApiClient();
-	return new Promise<CreateContactResponse | undefined>((resolve, reject) =>
-		client.deleteContact(
-			{
-				uri
-			},
-			(err, res) => {
-				if (err) reject(err);
-				else resolve(res);
-			}
-		)
-	);
-}
-
 function getApiClient(): ContactsServiceClient {
-	const baseUrl = env.API_ENDPOINT || 'localhost:9090';
-	return new ContactsServiceClient(baseUrl, credentials.createInsecure());
+	const host = env.API_ENDPOINT || '0.0.0.0:9090';
+	const transport = new GrpcTransport({
+		host,
+		channelCredentials: ChannelCredentials.createInsecure()
+	});
+	return new ContactsServiceClient(transport);
 }

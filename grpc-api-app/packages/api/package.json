@@ -17,12 +17,13 @@
   "license": "ISC",
   "dependencies": {
     "@grpc/grpc-js": "^1.8.9",
-    "@protobuf-ts/plugin": "^2.8.2",
+    "@protobuf-ts/grpc-backend": "^2.8.2",
     "dotenv": "^16.0.3",
     "lodash": "^4.17.21",
     "lowdb": "^5.1.0"
   },
   "devDependencies": {
+    "@protobuf-ts/plugin": "^2.8.2",
     "@trivago/prettier-plugin-sort-imports": "^3.3.0",
     "@types/jest": "^29.4.0",
     "@types/lodash": "^4.14.191",
