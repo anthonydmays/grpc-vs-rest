@@ -31,7 +31,7 @@ export function getContacts(opts: {
 
 export function createContact(contact: Contact) {
   const uri = `contacts/${getNextContactId()}`;
-  const newContact = { ...contact, uri } as Contact;
+  const newContact = { ...contact, uri };
   db.data?.contacts.push(newContact);
   return newContact;
 }
