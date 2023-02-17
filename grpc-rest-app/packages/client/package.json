@@ -36,8 +36,8 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@bufbuild/connect-web": "^0.7.0",
 		"@grpc-vs-rest/api-types": "*",
+		"@protobuf-ts/grpcweb-transport": "^2.8.2",
 		"grpc-web": "^1.4.2"
 	}
 }

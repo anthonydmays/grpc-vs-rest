@@ -1,18 +1,5 @@
-import {
-  CreateContactRequest,
-  CreateContactResponse,
-  DeleteContactRequest,
-  Empty,
-  GetContactRequest,
-  GetContactResponse,
-  ListContactsRequest,
-  ListContactsResponse,
-  UpdateContactRequest,
-  UpdateContactResponse,
-} from '@grpc-vs-rest/api-types';
-import { ServerUnaryCall, StatusObject } from '@grpc/grpc-js';
-import { Status } from '@grpc/grpc-js/build/src/constants';
 import { expect, it } from '@jest/globals';
+import { ServerCallContext } from '@protobuf-ts/runtime-rpc';
 import { describe } from 'node:test';
 import { ContactsService } from '../src/index';
 
@@ -21,16 +8,10 @@ const { objectContaining } = expect;
 describe('API', () => {
   it('should list contacts', async () => {
     const contactsService = new ContactsService();
-    const res = await new Promise<ListContactsResponse>((resolve) => {
-      contactsService.listContacts(
-        {
-          request: { pageNumber: 0, pageSize: 0, orderBy: '' },
-        } as ServerUnaryCall<ListContactsRequest, ListContactsResponse>,
-        (err, res) => {
-          resolve(res!);
-        },
-      );
-    });
+    const res = await contactsService.listContacts(
+      { pageNumber: 0, pageSize: 0, orderBy: '' },
+      {} as ServerCallContext,
+    );
 
     // Expect a JSON response.
     expect(res.pageNumber).toBe(0);
@@ -45,16 +26,10 @@ describe('API', () => {
 
   it('should list contacts with params', async () => {
     const contactsService = new ContactsService();
-    const res = await new Promise<ListContactsResponse>((resolve) => {
-      contactsService.listContacts(
-        {
-          request: { pageNumber: 1, pageSize: 5, orderBy: 'firstName' },
-        } as ServerUnaryCall<ListContactsRequest, ListContactsResponse>,
-        (err, res) => {
-          resolve(res!);
-        },
-      );
-    });
+    const res = await contactsService.listContacts(
+      { pageNumber: 1, pageSize: 5, orderBy: 'firstName' },
+      {} as ServerCallContext,
+    );
 
     // Expect a list of contacts.
     expect(res.contacts?.length).toBe(5);
@@ -71,16 +46,10 @@ describe('API', () => {
 
   it('should retrieve a contact', async () => {
     const contactsService = new ContactsService();
-    const res = await new Promise<GetContactResponse>((resolve) => {
-      contactsService.getContact(
-        {
-          request: { id: '184' },
-        } as ServerUnaryCall<GetContactRequest, GetContactResponse>,
-        (err, res) => {
-          resolve(res!);
-        },
-      );
-    });
+    const res = await contactsService.getContact(
+      { id: '184' },
+      {} as ServerCallContext,
+    );
 
     expect(res.contact?.firstName).toBe('Malachi');
     expect(res.contact?.lastName).toBe('Klehn');
@@ -89,23 +58,17 @@ describe('API', () => {
 
   it('should create a contact', async () => {
     const contactsService = new ContactsService();
-    const res = await new Promise<CreateContactResponse>((resolve) => {
-      contactsService.createContact(
-        {
-          request: {
-            contact: {
-              uri: '',
-              firstName: 'Anthony',
-              lastName: 'Mays',
-              email: 'my@email.com',
-            },
-          },
-        } as ServerUnaryCall<CreateContactRequest, CreateContactResponse>,
-        (err, res) => {
-          resolve(res!);
+    const res = await contactsService.createContact(
+      {
+        contact: {
+          uri: '',
+          firstName: 'Anthony',
+          lastName: 'Mays',
+          email: 'my@email.com',
         },
-      );
-    });
+      },
+      {} as ServerCallContext,
+    );
 
     expect(res.contact).toEqual(
       objectContaining({
@@ -119,23 +82,18 @@ describe('API', () => {
 
   it('should update a contact', async () => {
     const contactsService = new ContactsService();
-    const res = await new Promise<UpdateContactResponse>((resolve) => {
-      contactsService.updateContact(
-        {
-          request: {
-            contact: {
-              uri: 'contacts/184',
-              firstName: 'Malachai',
-              lastName: 'Clayn',
-              email: 'somenew@email.com',
-            },
-          },
-        } as ServerUnaryCall<UpdateContactRequest, UpdateContactResponse>,
-        (err, res) => {
-          resolve(res!);
+    const res = await contactsService.updateContact(
+      {
+        id: '184',
+        contact: {
+          uri: 'contacts/184',
+          firstName: 'Malachai',
+          lastName: 'Clayn',
+          email: 'somenew@email.com',
         },
-      );
-    });
+      },
+      {} as ServerCallContext,
+    );
 
     expect(res.contact).toEqual(
       objectContaining({
@@ -148,39 +106,24 @@ describe('API', () => {
 
   it('should delete a contact', async () => {
     const contactsService = new ContactsService();
-    const res = await new Promise<Empty>((resolve) => {
-      contactsService.deleteContact(
-        {
-          request: {
-            id: '72',
-          },
-        } as ServerUnaryCall<DeleteContactRequest, Empty>,
-        (err, res) => {
-          resolve(res!);
-        },
-      );
-    });
+    const res = await contactsService.deleteContact(
+      {
+        id: '72',
+      },
+      {} as ServerCallContext,
+    );
 
     expect(res).toEqual({});
 
-    const getRes = await new Promise<Partial<StatusObject>>((resolve) => {
-      contactsService.getContact(
+    try {
+      await contactsService.getContact(
         {
-          request: {
-            id: '72',
-          },
-        } as ServerUnaryCall<GetContactRequest, Empty>,
-        (err, res) => {
-          resolve(err as Partial<StatusObject>);
+          id: '72',
         },
+        {} as ServerCallContext,
       );
-    });
-
-    expect(getRes).toEqual(
-      objectContaining({
-        code: Status.NOT_FOUND,
-        details: 'Contact not found.',
-      }),
-    );
+    } catch (e: unknown) {
+      expect((e as Error).message).toBe('Contact not found.');
+    }
   });
 });

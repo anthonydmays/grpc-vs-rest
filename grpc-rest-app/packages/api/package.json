@@ -16,6 +16,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@protobuf-ts/grpc-backend": "^2.8.2",
     "dotenv": "^16.0.3",
     "lodash": "^4.17.21",
     "lowdb": "^5.1.0"

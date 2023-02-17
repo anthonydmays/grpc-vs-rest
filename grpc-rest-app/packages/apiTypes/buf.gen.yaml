@@ -3,10 +3,4 @@ version: v1
 plugins:
   - name: ts
     out: src/
-    opt: generate_dependencies,long_type_string,server_grpc1,client_grpc1
-  - plugin: es
-    out: src/
-    opt: target=ts
-  - plugin: connect-web
-    out: src/
-    opt: target=ts
+    opt: generate_dependencies,long_type_string,server_generic,client_generic
