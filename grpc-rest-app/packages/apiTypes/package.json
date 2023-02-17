@@ -25,14 +25,12 @@
   },
   "devDependencies": {
     "@bufbuild/buf": "^1.14.0",
-    "@bufbuild/protoc-gen-connect-web": "^0.7.0",
-    "@bufbuild/protoc-gen-es": "^1.0.0",
+    "@protobuf-ts/plugin": "^2.8.2",
     "typescript": "^5.0.0-dev.20230211"
   },
   "dependencies": {
     "@bufbuild/protobuf": "^1.0.0",
     "@grpc/grpc-js": "^1.8.9",
-    "@protobuf-ts/plugin": "^2.8.2",
     "googleapis": "^111.0.0"
   }
 }

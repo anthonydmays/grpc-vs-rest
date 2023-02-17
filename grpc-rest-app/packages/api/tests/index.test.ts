@@ -1,4 +1,3 @@
-import { HandlerContext } from '@bufbuild/connect-node';
 import {
   CreateContactRequest,
   CreateContactResponse,
@@ -17,8 +16,7 @@ import { expect, it } from '@jest/globals';
 import { describe } from 'node:test';
 import { ContactsService } from '../src/index';
 
-const { objectContaining, stringMatching } = expect;
-const DEFAULT_CONTEXT = {} as HandlerContext;
+const { objectContaining } = expect;
 
 describe('API', () => {
   it('should list contacts', async () => {
