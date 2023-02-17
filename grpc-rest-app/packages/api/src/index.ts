@@ -1,10 +1,12 @@
+import api = require('@grpc-vs-rest/api-types');
 import {
-  createHandlers,
-  mergeHandlers,
-  ServiceImpl,
-} from '@bufbuild/connect-node';
-import { ContactsService } from '@grpc-vs-rest/api-types';
-import http2 from 'http2';
+  handleUnaryCall,
+  Server,
+  ServerCredentials,
+  UntypedHandleCall,
+} from '@grpc/grpc-js';
+import { Status } from '@grpc/grpc-js/build/src/constants.js';
+import { Empty } from 'apiTypes/dist/cjs/google/protobuf/empty.js';
 import {
   createContact,
   deleteContact,
@@ -13,62 +15,95 @@ import {
   getContactsCount,
   updateContact,
 } from './contacts.js';
+const server = new Server();
 
-export const contactsServiceImpl: ServiceImpl<typeof ContactsService> = {
-  listContacts(req) {
-    let { pageNumber, pageSize, orderBy } = req;
+export class ContactsService implements api.IContactsService {
+  [name: string]: UntypedHandleCall;
+
+  listContacts: handleUnaryCall<
+    api.ListContactsRequest,
+    api.ListContactsResponse
+  > = (call, callback) => {
+    let { pageNumber, pageSize, orderBy } = call.request;
     pageSize = pageSize || 25;
     pageNumber = pageNumber ?? 0;
     const contacts = getContacts({ pageNumber, pageSize, orderBy });
-    return {
+
+    callback(null, {
       contacts,
       pageNumber,
       pageSize,
       orderBy,
       totalCount: getContactsCount(),
-    };
-  },
-  getContact(req) {
-    const contact = getContact(`contacts/${req.id}`);
+    });
+  };
+
+  getContact: handleUnaryCall<api.GetContactRequest, api.GetContactResponse> = (
+    call,
+    callback,
+  ) => {
+    const contact = getContact(`contacts/${call.request.id}`);
     if (!contact) {
-      throw new Error('Contact not found');
+      callback({ code: Status.NOT_FOUND, details: 'Contact not found.' }, null);
+      return;
     }
-    return { contact };
-  },
-  updateContact(req) {
+    callback(null, { contact });
+  };
+
+  updateContact: handleUnaryCall<
+    api.UpdateContactRequest,
+    api.UpdateContactResponse
+  > = (call, callback) => {
+    const req = call.request;
+
     if (!req.contact?.uri || !getContact(req.contact.uri)) {
-      throw new Error('Contact not found.');
+      callback({ code: Status.NOT_FOUND, details: 'Contact not found.' }, null);
+      return;
     }
 
     updateContact(req.contact.uri, req.contact);
     const contact = getContact(req.contact.uri);
-    return { contact };
-  },
-  deleteContact(req) {
+    return callback(null, { contact });
+  };
+
+  deleteContact: handleUnaryCall<api.DeleteContactRequest, Empty> = (
+    call,
+    callback,
+  ) => {
+    const req = call.request;
+
     if (!req.id || !getContact(`contacts/${req.id}`)) {
-      throw new Error('Contact not found.');
+      callback({ code: Status.NOT_FOUND, details: 'Contact not found.' }, null);
+      return;
     }
 
     deleteContact(`contacts/${req.id}`);
 
-    return {};
-  },
-  createContact(req) {
-    if (!req.contact) {
+    callback(null, {});
+  };
+
+  createContact: handleUnaryCall<
+    api.CreateContactRequest,
+    api.CreateContactResponse
+  > = (call, callback) => {
+    const update = call.request.contact;
+
+    if (!update) {
       throw new Error('Must provide a contact to create.');
     }
 
-    const contact = createContact(req.contact!);
+    const contact = createContact(update!);
 
-    return { contact };
-  },
-};
+    return callback(null, { contact });
+  };
+}
 
-// Create gRPC handlers.
-const handlers = createHandlers(ContactsService, contactsServiceImpl);
+if (!process.env.DISABLE_SERVER_FOR_TESTS) {
+  server.bindAsync('0.0.0.0:9090', ServerCredentials.createInsecure(), () => {
+    server.start();
 
-http2
-  .createServer({}, mergeHandlers(handlers))
-  .listen(9090, () =>
-    console.log(`⚡️[server]: Server is running at http://localhost:9090`),
-  );
+    server.addService(api.contactsServiceDefinition, new ContactsService());
+
+    console.log('server is running on 0.0.0.0:9090');
+  });
+}
