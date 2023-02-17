@@ -10,13 +10,15 @@
     "build": "npx tsc",
     "start": "node dist/index.js",
     "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js\"",
-    "test": "NODE_OPTIONS=--experimental-vm-modules jest --watch"
+    "test": "NODE_OPTIONS=--experimental-vm-modules DOTENV_CONFIG_PATH=.env.test jest --watch --setupFiles dotenv/config"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@bufbuild/connect-node": "^0.7.0",
+    "@grpc/grpc-js": "^1.8.9",
+    "@protobuf-ts/plugin": "^2.8.2",
     "dotenv": "^16.0.3",
     "lodash": "^4.17.21",
     "lowdb": "^5.1.0"

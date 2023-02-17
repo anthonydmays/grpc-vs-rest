@@ -6,7 +6,8 @@
     "module": "node16",
     "moduleResolution": "node16",
     "resolveJsonModule": true,
-    "outDir": "./dist"
+    "outDir": "./dist",
+    "declaration": true
   },
   "include": ["src/**/*", "src/**/*.json"],
   "references": [

@@ -11,7 +11,7 @@
     "types": "./dist/types/index.d.ts"
   },
   "files": [
-    "dist/**/"
+    "dist/**/*"
   ],
   "keywords": [],
   "author": "",
@@ -21,12 +21,14 @@
     "clean": "rm -rf ./dist/cjs/* ./dist/esm/* ./dist/types/*",
     "build": "npm run gen && npm run build:cjs && npm run build:esm+types",
     "build:cjs": "../../node_modules/typescript/bin/tsc --project tsconfig.json --module commonjs --outDir ./dist/cjs && echo >./dist/cjs/package.json '{\"type\":\"commonjs\"}'",
-    "build:esm+types": "../../node_modules/typescript/bin/tsc --project tsconfig.json --module esnext --outDir ./dist/esm --declaration --declarationDir ./dist/types"
+    "build:esm+types": "../../node_modules/typescript/bin/tsc --project tsconfig.json --module esnext --moduleResolution node --outDir ./dist/esm --declaration --declarationDir ./dist/types"
   },
   "devDependencies": {
     "@bufbuild/buf": "^1.14.0",
     "@bufbuild/protoc-gen-connect-web": "^0.7.0",
     "@bufbuild/protoc-gen-es": "^1.0.0",
+    "grpc_tools_node_protoc_ts": "^5.3.3",
+    "grpc-tools": "^1.12.4",
     "typescript": "^5.0.0-dev.20230211"
   },
   "dependencies": {

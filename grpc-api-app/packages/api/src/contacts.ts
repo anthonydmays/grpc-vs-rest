@@ -1,4 +1,4 @@
-import { Contact } from '@grpc-vs-rest/api-types';
+import type { Contact } from '@grpc-vs-rest/api-types';
 import _ from 'lodash';
 import { Low } from 'lowdb';
 import { JSONFile } from 'lowdb/node';
