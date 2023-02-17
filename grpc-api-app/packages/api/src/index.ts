@@ -82,14 +82,19 @@ export class ContactsService implements api.IContactsService {
   }
 }
 
+const port = process.env.PORT || 9090;
 if (!process.env.DISABLE_SERVER_FOR_TESTS) {
-  server.bindAsync('0.0.0.0:9090', ServerCredentials.createInsecure(), () => {
-    server.start();
+  server.bindAsync(
+    `0.0.0.0:${port}`,
+    ServerCredentials.createInsecure(),
+    () => {
+      server.start();
 
-    server.addService(
-      ...adaptService(api.ContactsService, new ContactsService()),
-    );
+      server.addService(
+        ...adaptService(api.ContactsService, new ContactsService()),
+      );
 
-    console.log('server is running on 0.0.0.0:9090');
-  });
+      console.log(`server is running on 0.0.0.0:${port}`);
+    },
+  );
 }
