@@ -4,6 +4,7 @@ import { ChannelCredentials } from '@grpc/grpc-js';
 import { GrpcTransport } from '@protobuf-ts/grpc-transport';
 import type { PageServerLoad } from './$types';
 
+/** Handles loading data for the page. */
 export const load = (async ({ url }) => {
 	const pageNumber = Number(url.searchParams.get('pageNumber')) || 0;
 	const orderBy = url.searchParams.get('orderBy') || '';
@@ -16,5 +17,6 @@ export const load = (async ({ url }) => {
 	const client = new ContactsServiceClient(transport);
 	const call = await client.listContacts({ pageNumber, pageSize: 25, orderBy });
 
+	// The default response is not Svelte serializable by default.
 	return JSON.parse(JSON.stringify(call.response));
 }) satisfies PageServerLoad;
