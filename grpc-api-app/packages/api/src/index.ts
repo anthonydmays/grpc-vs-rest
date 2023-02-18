@@ -30,6 +30,7 @@ export class ContactsService implements api.IContactsService {
       totalCount: getContactsCount(),
     };
   }
+
   async getContact(
     request: api.GetContactRequest,
     context: ServerCallContext,
@@ -40,6 +41,7 @@ export class ContactsService implements api.IContactsService {
     }
     return { contact };
   }
+
   async updateContact(
     request: api.UpdateContactRequest,
     context: ServerCallContext,
@@ -54,6 +56,7 @@ export class ContactsService implements api.IContactsService {
     const contact = getContact(req.contact.uri);
     return { contact };
   }
+
   async deleteContact(
     request: api.DeleteContactRequest,
     context: ServerCallContext,
@@ -66,6 +69,7 @@ export class ContactsService implements api.IContactsService {
 
     return {};
   }
+
   async createContact(
     request: api.CreateContactRequest,
     context: ServerCallContext,
