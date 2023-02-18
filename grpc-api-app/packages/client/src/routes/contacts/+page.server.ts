@@ -2,7 +2,7 @@ import { env } from '$env/dynamic/public';
 import { Contact, ContactsServiceClient } from '@grpc-vs-rest/api-types';
 import { ChannelCredentials } from '@grpc/grpc-js';
 import { GrpcTransport } from '@protobuf-ts/grpc-transport';
-import { redirect } from '@sveltejs/kit';
+import { error, redirect } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
 
 /** Handles loading data for the page. */
@@ -12,13 +12,15 @@ export const load = (async ({ url }) => {
 		return {};
 	}
 
-	const client = getApiClient();
-
-	const call = await client.getContact({
-		uri
-	});
-
-	return { ...call.response.contact };
+	try {
+		const client = getApiClient();
+		const call = await client.getContact({
+			uri
+		});
+		return { ...call.response.contact };
+	} catch (e) {
+		throw error(404, 'Not found');
+	}
 }) satisfies PageServerLoad;
 
 /** Handles saving updated contact information. */
