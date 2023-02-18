@@ -16,7 +16,7 @@ export interface ApiResponse {
 
 export type Link = {
   href: string;
-  type: "GET" | "POST" | "PUT" | "DELETE";
+  type: 'GET' | 'POST' | 'PUT' | 'DELETE';
 };
 
 export interface ErrorResponse {
