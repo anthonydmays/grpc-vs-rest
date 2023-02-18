@@ -1,3 +1,5 @@
+export { Empty } from './google/protobuf/empty.js';
+export { ContactsServiceClient } from './proto/contacts/v1/contacts.client.js';
 export {
   Contact,
   ContactsService,
@@ -10,7 +12,5 @@ export {
   ListContactsResponse,
   UpdateContactRequest,
   UpdateContactResponse,
-} from "./proto/contacts/v1/contacts.js";
-export { IContactsService } from "./proto/contacts/v1/contacts.server.js";
-export { ContactsServiceClient } from "./proto/contacts/v1/contacts.client.js";
-export { Empty } from "./google/protobuf/empty.js";
+} from './proto/contacts/v1/contacts.js';
+export { IContactsService } from './proto/contacts/v1/contacts.server.js';
