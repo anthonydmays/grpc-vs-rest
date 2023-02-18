@@ -3,7 +3,7 @@ import {
   Contact,
   ErrorResponse,
   GetContactResponse,
-  GetContactsResponse,
+  ListContactsResponse,
 } from '@grpc-vs-rest/api-types';
 import dotenv from 'dotenv';
 import express, { json, Request, Response } from 'express';
@@ -34,7 +34,7 @@ app.get('/', (req, res) => {
   res.redirect('/v1/contacts');
 });
 
-app.get('/v1/contacts', (req, res: Response<GetContactsResponse>) => {
+app.get('/v1/contacts', (req, res: Response<ListContactsResponse>) => {
   const pageSize = Number(req.query.pageSize) || 25;
   const pageNumber = Number(req.query.pageNumber) || 0;
   const orderBy = String(req.query.orderBy);

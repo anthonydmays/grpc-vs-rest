@@ -23,7 +23,7 @@ export interface ErrorResponse {
   message: string;
 }
 
-export interface GetContactsResponse extends ApiResponse {
+export interface ListContactsResponse extends ApiResponse {
   resource: {
     list: ContactResource[];
     pageNumber: number;
