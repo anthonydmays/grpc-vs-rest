@@ -25,12 +25,12 @@
 </nav>
 
 <form method="post" action="?/update">
-	{#if data.resource._links.self}
+	{#if data.resource._links?.self}
 		<input name="url" type="hidden" bind:value={data.resource._links['self'].href} />
 		<input name="deleteUrl" type="hidden" bind:value={data.resource._links['delete'].href} />
 	{/if}
-	{#if data.resource._links.create}
-		<input name="createUrl" type="hidden" bind:value={data.resource._links['create'].href} />
+	{#if data.createUrl}
+		<input name="createUrl" type="hidden" bind:value={data.createUrl} />
 	{/if}
 	<div class="field">
 		<label for="firstName">First Name</label>
@@ -45,7 +45,7 @@
 		<input name="email" type="email" bind:value={data.resource.email} />
 	</div>
 	<button type="submit">Save contact</button>
-	{#if data.resource._links.self}
+	{#if data.resource._links?.self}
 		<button type="submit" formaction="?/delete">Delete contact</button>
 	{/if}
 </form>

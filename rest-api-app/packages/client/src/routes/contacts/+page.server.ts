@@ -1,4 +1,4 @@
-import type { Contact, ContactResource, GetContactResponse } from '@grpc-vs-rest/api-types';
+import type { Contact, GetContactResponse } from '@grpc-vs-rest/api-types';
 import { error, redirect } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
 
@@ -6,23 +6,12 @@ import type { Actions, PageServerLoad } from './$types';
 export const load = (async ({ fetch, url, params }) => {
 	if (!url.searchParams.get('url')) {
 		return {
-			resource: {
-				uri: '',
-				firstName: '',
-				lastName: '',
-				email: '',
-				_links: {
-					create: {
-						href: `${url.searchParams.get('createUrl')}`,
-						type: 'POST'
-					}
-				}
-			} as ContactResource
+			resource: NEW_CONTACT_TEMPLATE,
+			createUrl: `${url.searchParams.get('createUrl')}`
 		};
 	}
 
 	const res = (await (await fetch(`${url.searchParams.get('url')}`)).json()) as GetContactResponse;
-
 	if (res) {
 		return res;
 	}
@@ -70,3 +59,11 @@ export const actions = {
 		throw redirect(303, '/');
 	}
 } satisfies Actions;
+
+// Template for a new contact resource.
+const NEW_CONTACT_TEMPLATE: Contact = {
+	uri: '',
+	lastName: '',
+	firstName: '',
+	email: ''
+};
