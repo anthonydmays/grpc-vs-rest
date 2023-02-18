@@ -7,6 +7,7 @@
     "packages/*"
   ],
   "scripts": {
+    "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json,svelte}' --config ./.prettierrc",
     "build:apiTypes": "cd packages/apiTypes && npm run build",
     "test:api": "cd packages/api && npm run test",
     "dev:api": "cd packages/api && npm run dev",
@@ -14,7 +15,27 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
+  "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^3.3.0",
+    "@types/express": "^4.17.17",
+    "@types/jest": "^29.4.0",
+    "@types/lodash": "^4.14.191",
+    "@types/node": "^18.13.0",
+    "@types/supertest": "^2.0.12",
+    "@typescript-eslint/eslint-plugin": "^5.12.0",
+    "@typescript-eslint/parser": "^5.12.0",
+    "eslint": "^8.9.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-svelte3": "^4.0.0",
+    "prettier": "^2.7.1",
+    "prettier-plugin-jsdoc": "^0.4.2",
+    "prettier-plugin-organize-imports": "^3.1.1",
+    "prettier-plugin-svelte": "^2.8.1"
+  },
   "dependencies": {
     "@grpc-vs-rest/api-types": "*",
     "typescript": "^4.9.5"

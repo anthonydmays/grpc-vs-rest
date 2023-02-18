@@ -11,10 +11,19 @@
   "importOrderSeparation": true,
   "importOrderSortSpecifiers": true,
   "pluginSearchDirs": [
-    "../../node_modules"
+    "./node_modules"
   ],
   "plugins": [
     "prettier-plugin-organize-imports",
-    "prettier-plugin-jsdoc"
+    "prettier-plugin-jsdoc",
+    "prettier-plugin-svelte"
+  ],
+  "overrides": [
+    {
+      "files": "*.svelte",
+      "options": {
+        "parser": "svelte"
+      }
+    }
   ]
 }

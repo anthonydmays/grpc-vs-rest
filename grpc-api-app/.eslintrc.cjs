@@ -1,9 +1,9 @@
 module.exports = {
 	root: true,
 	parser: '@typescript-eslint/parser',
-	extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended', 'prettier'],
+	extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended', 'plugin:prettier/recommended'],
 	plugins: ['svelte3', '@typescript-eslint'],
-	ignorePatterns: ['*.cjs'],
+	ignorePatterns: ['*.cjs',"dist/**/*"],
 	overrides: [{ files: ['*.svelte'], processor: 'svelte3/svelte3' }],
 	settings: {
 		'svelte3/typescript': () => require('typescript')
@@ -14,7 +14,21 @@ module.exports = {
 	},
 	env: {
 		browser: true,
-		es2017: true,
+		es2021: true,
 		node: true
+	},
+	rules: {
+	  '@typescript-eslint/ban-types': [
+		'error',
+		{
+		  'extendDefaults': true,
+		  'types': {
+			'{}': false
+		  }
+		}
+	  ]
+	},
+	globals: {
+	  '__COMMIT_HASH__': true
 	}
 };

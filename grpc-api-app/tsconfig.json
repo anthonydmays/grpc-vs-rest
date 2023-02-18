@@ -1,20 +1,19 @@
 {
-    "compilerOptions": {
-      "target": "esnext",
-      "outDir": ".",
-      "esModuleInterop": true,
-      "noImplicitAny": true,
-      "sourceMap": true,
-      "forceConsistentCasingInFileNames": true,
-      "strict": true,
-      "skipLibCheck": true,
-      "composite": true,
-      "baseUrl": "./packages"
-    },
-    "references": [
-      { "path": "./packages/api/" },
-      { "path": "./packages/apiTypes/" },
-      { "path": "./packages/client/" }
-    ]
-  }
-  
+  "compilerOptions": {
+    "target": "esnext",
+    "outDir": ".",
+    "esModuleInterop": true,
+    "noImplicitAny": true,
+    "sourceMap": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "composite": true,
+    "baseUrl": "./packages"
+  },
+  "references": [
+    { "path": "./packages/api/" },
+    { "path": "./packages/apiTypes/" },
+    { "path": "./packages/client/" }
+  ]
+}
