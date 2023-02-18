@@ -2,6 +2,7 @@ import { env } from '$env/dynamic/public';
 import type { ListContactsResponse } from '@grpc-vs-rest/api-types';
 import type { PageLoad } from './$types';
 
+/** Handles loading data for the page. */
 export const load = (async ({ url }) => {
 	const baseUrl = env.PUBLIC_API_ENDPOINT || 'http://0.0.0.0:8080';
 	const pageNumber = Number(url.searchParams.get('pageNumber')) || 0;
