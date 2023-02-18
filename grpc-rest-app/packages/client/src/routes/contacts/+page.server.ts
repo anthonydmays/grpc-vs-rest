@@ -1,10 +1,10 @@
-import { env } from '$env/dynamic/private';
+import { env } from '$env/dynamic/public';
 import type { Contact, GetContactResponse } from '@grpc-vs-rest/api-types';
 import { redirect } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
 
 /** Handles loading data for the page. */
-export const load = (async ({ fetch, url, params }) => {
+export const load = (async ({ url }) => {
 	const uri = url.searchParams.get('uri') || '';
 
 	if (!uri) {
@@ -18,7 +18,7 @@ export const load = (async ({ fetch, url, params }) => {
 
 /** Handles saving updated contact information. */
 export const actions = {
-	update: async ({ fetch, request, params }) => {
+	update: async ({ fetch, request }) => {
 		const data = await request.formData();
 
 		const contact: Partial<Contact> = {};
@@ -62,5 +62,5 @@ function getContactUrl(uri: string): string {
 }
 
 function getBaseUrl(): string {
-	return env.API_ENDPOINT || 'http://0.0.0.0:8080/v1/contacts';
+	return env.PUBLIC_API_ENDPOINT || 'http://0.0.0.0:8080/v1/contacts';
 }

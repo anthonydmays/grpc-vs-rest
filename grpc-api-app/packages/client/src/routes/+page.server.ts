@@ -1,4 +1,4 @@
-import { env } from '$env/dynamic/private';
+import { env } from '$env/dynamic/public';
 import { ContactsServiceClient } from '@grpc-vs-rest/api-types';
 import { ChannelCredentials } from '@grpc/grpc-js';
 import { GrpcTransport } from '@protobuf-ts/grpc-transport';
@@ -8,7 +8,7 @@ export const load = (async ({ url }) => {
 	const pageNumber = Number(url.searchParams.get('pageNumber')) || 0;
 	const orderBy = url.searchParams.get('orderBy') || '';
 
-	const host = env.API_ENDPOINT || '0.0.0.0:9090';
+	const host = env.PUBLIC_API_ENDPOINT || '0.0.0.0:9090';
 	const transport = new GrpcTransport({
 		host,
 		channelCredentials: ChannelCredentials.createInsecure()

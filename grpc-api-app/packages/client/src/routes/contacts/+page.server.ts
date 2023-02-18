@@ -1,4 +1,4 @@
-import { env } from '$env/dynamic/private';
+import { env } from '$env/dynamic/public';
 import { Contact, ContactsServiceClient } from '@grpc-vs-rest/api-types';
 import { ChannelCredentials } from '@grpc/grpc-js';
 import { GrpcTransport } from '@protobuf-ts/grpc-transport';
@@ -6,7 +6,7 @@ import { redirect } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
 
 /** Handles loading data for the page. */
-export const load = (async ({ fetch, url, params }) => {
+export const load = (async ({ url }) => {
 	const uri = url.searchParams.get('uri') || '';
 	if (!uri) {
 		return {};
@@ -23,7 +23,7 @@ export const load = (async ({ fetch, url, params }) => {
 
 /** Handles saving updated contact information. */
 export const actions = {
-	update: async ({ fetch, request, params }) => {
+	update: async ({ request }) => {
 		const data = await request.formData();
 
 		const contact: Contact = {
@@ -55,7 +55,7 @@ export const actions = {
 } satisfies Actions;
 
 function getApiClient(): ContactsServiceClient {
-	const host = env.API_ENDPOINT || '0.0.0.0:9090';
+	const host = env.PUBLIC_API_ENDPOINT || '0.0.0.0:9090';
 	const transport = new GrpcTransport({
 		host,
 		channelCredentials: ChannelCredentials.createInsecure()

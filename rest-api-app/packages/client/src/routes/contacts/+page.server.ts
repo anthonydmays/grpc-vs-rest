@@ -1,9 +1,9 @@
-import type { Contact, GetContactResponse } from '@grpc-vs-rest/api-types';
+import type { Contact, ContactResource, GetContactResponse } from '@grpc-vs-rest/api-types';
 import { error, redirect } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
 
 /** Handles loading data for the page. */
-export const load = (async ({ fetch, url, params }) => {
+export const load = (async ({ url }) => {
 	if (!url.searchParams.get('url')) {
 		return {
 			resource: NEW_CONTACT_TEMPLATE,
@@ -21,7 +21,7 @@ export const load = (async ({ fetch, url, params }) => {
 
 /** Handles saving updated contact information. */
 export const actions = {
-	update: async ({ fetch, request, params }) => {
+	update: async ({ request }) => {
 		const data = await request.formData();
 
 		const contact: Partial<Contact> = {};
@@ -61,9 +61,10 @@ export const actions = {
 } satisfies Actions;
 
 // Template for a new contact resource.
-const NEW_CONTACT_TEMPLATE: Contact = {
+const NEW_CONTACT_TEMPLATE: ContactResource = {
 	uri: '',
 	lastName: '',
 	firstName: '',
-	email: ''
+	email: '',
+	_links: {}
 };

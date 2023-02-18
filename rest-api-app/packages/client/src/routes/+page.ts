@@ -1,12 +1,12 @@
-import { env } from '$env/dynamic/private';
+import { env } from '$env/dynamic/public';
 import type { GetContactsResponse } from '@grpc-vs-rest/api-types';
 import { error } from '@sveltejs/kit';
-import type { PageServerLoad } from './$types';
+import type { PageLoad } from './$types';
 
 /** Handles loading data for the page. */
-export const load = (async ({ fetch, url, params }) => {
+export const load = (async ({ url }) => {
 	const apiEndpoint =
-		url.searchParams.get('url') || env.API_ENDPOINT || 'http://localhost:9090/v1/contacts';
+		url.searchParams.get('url') || env.PUBLIC_API_ENDPOINT || 'http://localhost:9090/v1/contacts';
 
 	const res = (await (await fetch(`${apiEndpoint}`)).json()) as GetContactsResponse;
 	if (res) {
@@ -14,4 +14,4 @@ export const load = (async ({ fetch, url, params }) => {
 	}
 
 	throw error(404, 'Not found');
-}) satisfies PageServerLoad;
+}) satisfies PageLoad;
