@@ -4,28 +4,15 @@
 	export let data: PageData;
 </script>
 
-<style>
-	nav a {
-		padding: 5px;
-		text-decoration: none;
-		font-weight: bold;
-		font-size: 1.2em;
-	}
-
-	nav, .orderby, .create {
-		margin-bottom: 16px;
-	}
-</style>
-
 <nav>
 	{#if data._links?.firstPage}
 		<a href="?url={encodeURIComponent(data._links.firstPage.href)}">{'<<'}</a> |
 	{/if}
 	{#if data._links?.previousPage}
-		<a href="?url={encodeURIComponent(data._links.previousPage.href)}">{'<'}</a>  |
+		<a href="?url={encodeURIComponent(data._links.previousPage.href)}">{'<'}</a> |
 	{/if}
 	{#if data._links?.nextPage}
-		<a href="?url={encodeURIComponent(data._links.nextPage.href)}">{'>'}</a>  |
+		<a href="?url={encodeURIComponent(data._links.nextPage.href)}">{'>'}</a> |
 	{/if}
 	{#if data._links?.lastPage}
 		<a href="?url={encodeURIComponent(data._links.lastPage.href)}">{'>>'}</a>
@@ -35,10 +22,10 @@
 <div class="orderby">
 	Order by:
 	{#if data._links?.orderByFirstName}
-		<a href="?url={encodeURIComponent(data._links.orderByFirstName.href)}">First name</a>  |
+		<a href="?url={encodeURIComponent(data._links.orderByFirstName.href)}">First name</a> |
 	{/if}
 	{#if data._links?.orderByLastName}
-		<a href="?url={encodeURIComponent(data._links.orderByLastName.href)}">Last name</a>  |
+		<a href="?url={encodeURIComponent(data._links.orderByLastName.href)}">Last name</a> |
 	{/if}
 	{#if data._links?.orderByEmail}
 		<a href="?url={encodeURIComponent(data._links.orderByEmail.href)}">Email</a>
@@ -47,7 +34,8 @@
 
 {#if data._links?.create}
 	<div class="create">
-		<a href="contacts?createUrl={encodeURIComponent(data._links.create.href)}">Create new contact</a>
+		<a href="contacts?createUrl={encodeURIComponent(data._links.create.href)}">Create new contact</a
+		>
 	</div>
 {/if}
 
@@ -61,3 +49,18 @@
 		</tr>
 	{/each}
 </table>
+
+<style>
+	nav a {
+		padding: 5px;
+		text-decoration: none;
+		font-weight: bold;
+		font-size: 1.2em;
+	}
+
+	nav,
+	.orderby,
+	.create {
+		margin-bottom: 16px;
+	}
+</style>

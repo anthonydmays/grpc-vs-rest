@@ -4,21 +4,6 @@
 	export let data: PageData;
 </script>
 
-<style>
-	nav {
-		margin-bottom: 16px;
-	}
-
-	.field {
-		display: grid;
-    	grid-template-columns: 120px auto;
-		grid-column-start: 1;
-    	grid-column-end: 2;
-		margin-bottom: 8px;
-		width: 380px;
-	}
-</style>
-
 <h1>Edit Contact</h1>
 <nav style="margin-bottom: 16px;">
 	<a href="/">{'<'} Back to all contacts</a>
@@ -49,3 +34,18 @@
 		<button type="submit" formaction="?/delete">Delete contact</button>
 	{/if}
 </form>
+
+<style>
+	nav {
+		margin-bottom: 16px;
+	}
+
+	.field {
+		display: grid;
+		grid-template-columns: 120px auto;
+		grid-column-start: 1;
+		grid-column-end: 2;
+		margin-bottom: 8px;
+		width: 380px;
+	}
+</style>

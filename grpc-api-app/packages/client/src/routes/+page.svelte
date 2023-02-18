@@ -6,19 +6,6 @@
 	const lastPage = Math.floor(data.totalCount / (data.pageSize || 25));
 </script>
 
-<style>
-	nav a {
-		padding: 5px;
-		text-decoration: none;
-		font-weight: bold;
-		font-size: 1.2em;
-	}
-
-	nav, .orderby, .create {
-		margin-bottom: 16px;
-	}
-</style>
-
 <nav>
 	<a href="?orderBy={data.orderBy}">{'<<'}</a> |
 	{#if data.pageNumber > 0}
@@ -51,3 +38,18 @@
 		</tr>
 	{/each}
 </table>
+
+<style>
+	nav a {
+		padding: 5px;
+		text-decoration: none;
+		font-weight: bold;
+		font-size: 1.2em;
+	}
+
+	nav,
+	.orderby,
+	.create {
+		margin-bottom: 16px;
+	}
+</style>

@@ -23,11 +23,12 @@ export const actions = {
 	update: async ({ request }) => {
 		const data = await request.formData();
 
-		const contact: Partial<Contact> = {};
-		contact.firstName = String(data.get('firstName'));
-		contact.lastName = String(data.get('lastName'));
-		contact.email = String(data.get('email'));
-		contact.uri = String(data.get('uri') || '');
+		const contact: Contact = {
+			firstName: String(data.get('firstName')),
+			lastName: String(data.get('lastName')),
+			email: String(data.get('email')),
+			uri: String(data.get('uri') || '')
+		};
 
 		const isNew = !contact.uri;
 		const endpointUrl = isNew ? getBaseUrl() : getContactUrl(contact.uri);
