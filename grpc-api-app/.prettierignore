@@ -8,6 +8,9 @@ build
 !.env.example
 dist
 
+# Ignore generated file, linter messes it up.
+packages/apiTypes/src/google/protobuf/descriptor.ts
+
 # Ignore files for PNPM, NPM and YARN
 pnpm-lock.yaml
 package-lock.json

@@ -48,11 +48,11 @@ export interface Http {
   rules: HttpRule[];
   /**
    * When set to true, URL path parameters will be fully URI-decoded except in
-   * cases of single segment matches in reserved expansion, where "%2F" will be
-   * left encoded.
+   * cases of single segment matches in reserved expansion, where "%2F" will
+   * be left encoded.
    *
-   * The default behavior is to not decode RFC 6570 reserved characters in multi
-   * segment matches.
+   * The default behavior is to not decode RFC 6570 reserved characters in
+   * multi segment matches.
    *
    * @generated from protobuf field: bool fully_decode_reserved_expansion = 2;
    */
@@ -126,9 +126,7 @@ export interface Http {
  * This enables a HTTP JSON to RPC mapping as below:
  *
  * HTTP | gRPC -----|----- `GET /v1/messages/123456?revision=2&sub.subfield=foo`
- *
  * | `GetMessage(message_id: "123456" revision: 2 sub: SubMessage(subfield:
- *
  * "foo"))`
  *
  * Note that fields which are mapped to URL query parameters must have a
@@ -397,7 +395,8 @@ export interface HttpRule {
   /**
    * The name of the request field whose value is mapped to the HTTP request
    * body, or `*` for mapping all request fields not captured by the path
-   * pattern to the HTTP body, or omitted for not having any HTTP request body.
+   * pattern to the HTTP body, or omitted for not having any HTTP request
+   * body.
    *
    * NOTE: the referred field must be present at the top-level of the request
    * message type.
@@ -406,9 +405,9 @@ export interface HttpRule {
    */
   body: string;
   /**
-   * Optional. The name of the response field whose value is mapped to the HTTP
-   * response body. When omitted, the entire response message will be used as
-   * the HTTP response body.
+   * Optional. The name of the response field whose value is mapped to the
+   * HTTP response body. When omitted, the entire response message will be
+   * used as the HTTP response body.
    *
    * NOTE: The referred field must be present at the top-level of the response
    * message type.
@@ -417,9 +416,9 @@ export interface HttpRule {
    */
   responseBody: string;
   /**
-   * Additional HTTP bindings for the selector. Nested bindings must not contain
-   * an `additional_bindings` field themselves (that is, the nesting may only be
-   * one level deep).
+   * Additional HTTP bindings for the selector. Nested bindings must not
+   * contain an `additional_bindings` field themselves (that is, the nesting
+   * may only be one level deep).
    *
    * @generated from protobuf field: repeated google.api.HttpRule additional_bindings = 11;
    */
