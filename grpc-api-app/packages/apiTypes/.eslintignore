@@ -1,0 +1,2 @@
+# Ignore generated file, linter messes it up.
+src/google/protobuf/descriptor.ts
