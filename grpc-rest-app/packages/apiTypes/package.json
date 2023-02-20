@@ -20,7 +20,7 @@
     "format": "prettier --config ../../.prettierrc --write src/**/*",
     "gen": "buf generate",
     "clean": "rm -rf ./dist/cjs/* ./dist/esm/* ./dist/types/*",
-    "build": "npm run gen && npm run format && npm run build:cjs && npm run build:esm+types && mkdir -p ../proxy/tmp/envoy && buf build -o ../proxy/tmp/envoy/contacts.pb --as-file-descriptor-set",
+    "build": "npm run gen && npm run format && npm run build:cjs && npm run build:esm+types && npx mkdirp ../proxy/tmp/envoy && buf build -o ../proxy/tmp/envoy/contacts.pb --as-file-descriptor-set",
     "build:cjs": "tsc --project tsconfig.json --module commonjs --outDir ./dist/cjs && echo >./dist/cjs/package.json '{\"type\":\"commonjs\"}'",
     "build:esm+types": "tsc --project tsconfig.json --module esnext --moduleResolution node --outDir ./dist/esm --declaration --declarationDir ./dist/types"
   },
