@@ -7,7 +7,7 @@ export const load = (async ({ url }) => {
   const pageNumber = Number(url.searchParams.get('pageNumber')) || 0;
   const orderBy = url.searchParams.get('orderBy') || '';
 
-  const baseUrl = env.PUBLIC_API_ENDPOINT || 'http://0.0.0.0:8080';
+  const baseUrl = env.PUBLIC_API_ENDPOINT || 'http://localhost:8080';
   const transport = new GrpcWebFetchTransport({
     baseUrl,
     format: 'binary',

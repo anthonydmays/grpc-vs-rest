@@ -57,7 +57,7 @@ export const actions = {
 } satisfies Actions;
 
 function getApiClient(): ContactsServiceClient {
-  const host = env.PUBLIC_API_ENDPOINT || '0.0.0.0:9090';
+  const host = env.PUBLIC_API_ENDPOINT || 'localhost:9090';
   const transport = new GrpcTransport({
     host,
     channelCredentials: ChannelCredentials.createInsecure(),

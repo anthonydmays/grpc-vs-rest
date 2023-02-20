@@ -21,7 +21,7 @@
     "gen": "buf generate",
     "clean": "rm -rf ./dist/cjs/* ./dist/esm/* ./dist/types/*",
     "build": "npm run gen && npm run format && npm run build:cjs && npm run build:esm+types",
-    "build:cjs": "tsc --project tsconfig.json --module commonjs --outDir ./dist/cjs && echo >./dist/cjs/package.json '{\"type\":\"commonjs\"}'",
+    "build:cjs": "tsc --project tsconfig.json --module commonjs --outDir ./dist/cjs && echo >./dist/cjs/package.json {\"type\":\"commonjs\"}",
     "build:esm+types": "tsc --project tsconfig.json --module esnext --moduleResolution node --outDir ./dist/esm --declaration --declarationDir ./dist/types"
   },
   "devDependencies": {

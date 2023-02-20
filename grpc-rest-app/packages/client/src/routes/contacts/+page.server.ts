@@ -67,5 +67,5 @@ function getContactUrl(uri: string): string {
 }
 
 function getBaseUrl(): string {
-  return env.PUBLIC_API_ENDPOINT || 'http://0.0.0.0:8080/v1/contacts';
+  return env.PUBLIC_API_ENDPOINT || 'http://localhost:8080/v1/contacts';
 }
