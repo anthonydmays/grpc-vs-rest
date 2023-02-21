@@ -10,7 +10,6 @@ import {
   getContactsCount,
   updateContact,
 } from './contacts.js';
-const server = new Server();
 
 export class ContactsService implements api.IContactsService {
   async listContacts(
@@ -86,8 +85,9 @@ export class ContactsService implements api.IContactsService {
   }
 }
 
-const port = process.env.PORT || 9090;
 if (!process.env.DISABLE_SERVER_FOR_TESTS) {
+  const port = process.env.PORT || 9090;
+  const server = new Server();
   server.bindAsync(
     `0.0.0.0:${port}`,
     ServerCredentials.createInsecure(),
