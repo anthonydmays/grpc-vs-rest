@@ -33,8 +33,7 @@ npm run dev:client
 4. In a new window, run the proxy server on Docker.
 
 ```console
-cd packages/proxy
-docker compose up
+docker compose -f packages/proxy/docker-compose.yaml
 ```
 
 > :warning: If you get 500 errors when testing the client or API, you can [install Envoy](https://www.envoyproxy.io/docs/envoy/latest/start/install) directly and run the configuration by executing `envoy -c envoy.yaml`.
