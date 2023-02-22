@@ -18,6 +18,13 @@ The following is a description of the projects you can demo.
 | **[grpc-api-app](grpc-api-app/)**   | Address book app built using a gRPC API.                                                   |
 | **[grpc-rest-app](grpc-rest-app/)** | Address book app built using a gRPC API with a REST endpoint using an Envoy reverse proxy. |
 
+## Resources
+
+- [gRPC vs REST: Comparing API Styles in Practice](https://dev.to/anthonydmays/grpc-vs-rest-comparing-api-styles-in-practice-4bl) by Anthony D. Mays
+- [gRPC vs REST: Understanding gRPC, OpenAPI and REST and when to use them in API design](https://cloud.google.com/blog/products/api-management/understanding-grpc-openapi-and-rest-and-when-to-use-them) by Martin Nally
+- [Architectural Styles and the Design of Network-based Software Architectures](https://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm) by Roy Fielding
+- [Use gRPC with Node.js and Typescript](https://dev.to/devaddict/use-grpc-with-node-js-and-typescript-3c58) by Aria Azadi Pour
+
 ## Acknowledgements
 
 These demos were presented at Hacking With The Homies Developer Conference (HWTHDC) 2023 by Anthony D. Mays in the session entitled "gRPC vs REST" on February 23, 2023.
