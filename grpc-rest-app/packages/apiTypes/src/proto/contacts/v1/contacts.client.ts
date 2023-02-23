@@ -8,7 +8,7 @@ import type {
   UnaryCall,
 } from '@protobuf-ts/runtime-rpc';
 import { stackIntercept } from '@protobuf-ts/runtime-rpc';
-import type { Empty } from '../../../google/protobuf/empty';
+import type { Empty } from '../../../google/protobuf/empty.js';
 import type {
   CreateContactRequest,
   CreateContactResponse,
@@ -19,8 +19,8 @@ import type {
   ListContactsResponse,
   UpdateContactRequest,
   UpdateContactResponse,
-} from './contacts';
-import { ContactsService } from './contacts';
+} from './contacts.js';
+import { ContactsService } from './contacts.js';
 /**
  * An API for managing a collection of contacts.
  *

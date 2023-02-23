@@ -2,7 +2,7 @@
 // @generated from protobuf file "proto/contacts/v1/contacts.proto" (package "proto.contacts.v1", syntax proto3)
 // tslint:disable
 import { ServerCallContext } from '@protobuf-ts/runtime-rpc';
-import { Empty } from '../../../google/protobuf/empty';
+import { Empty } from '../../../google/protobuf/empty.js';
 import {
   CreateContactRequest,
   CreateContactResponse,
@@ -13,7 +13,7 @@ import {
   ListContactsResponse,
   UpdateContactRequest,
   UpdateContactResponse,
-} from './contacts';
+} from './contacts.js';
 /**
  * An API for managing a collection of contacts.
  *

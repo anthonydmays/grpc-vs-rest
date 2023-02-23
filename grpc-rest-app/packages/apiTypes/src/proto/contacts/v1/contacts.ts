@@ -16,7 +16,7 @@ import {
   WireType,
 } from '@protobuf-ts/runtime';
 import { ServiceType } from '@protobuf-ts/runtime-rpc';
-import { Empty } from '../../../google/protobuf/empty';
+import { Empty } from '../../../google/protobuf/empty.js';
 /**
  * Describes a ListContacts request with paging information.
  *

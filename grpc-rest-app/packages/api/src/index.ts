@@ -1,4 +1,4 @@
-import api = require('@grpc-vs-rest/api-types');
+import * as api from '@grpc-vs-rest/api-types';
 import { Server, ServerCredentials } from '@grpc/grpc-js';
 import { adaptService } from '@protobuf-ts/grpc-backend';
 import { ServerCallContext } from '@protobuf-ts/runtime-rpc';

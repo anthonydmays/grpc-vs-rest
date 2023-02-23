@@ -18,7 +18,7 @@
   "license": "ISC",
   "scripts": {
     "format": "prettier --config ../../.prettierrc --write src/**/*",
-    "gen": "buf generate",
+    "gen": "buf generate && node proto-patch.js",
     "clean": "rm -rf ./dist/cjs/* ./dist/esm/* ./dist/types/*",
     "build": "npm run gen && npm run format && npm run build:cjs && npm run build:esm+types && npx mkdirp ../proxy/tmp/envoy && buf build -o ../proxy/tmp/envoy/contacts.pb --as-file-descriptor-set",
     "build:cjs": "tsc --project tsconfig.json --module commonjs --outDir ./dist/cjs && echo >./dist/cjs/package.json {\"type\":\"commonjs\"}",
