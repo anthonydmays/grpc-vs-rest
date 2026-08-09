@@ -1,3 +1,5 @@
+
+
 # gRPC vs REST Demos
 
 ## Description
@@ -14,7 +16,7 @@ The following is a description of the projects you can demo.
 
 | Project                             | Description                                                                                |
 | ----------------------------------- | ------------------------------------------------------------------------------------------ |
-| **[rest-api-app](rest-api-app/)**   | Address book app built using a REST API built on Express and a Svelte fronted.             |
+| **[rest-api-app](rest-api-app/)**   | Address book app built using a REST API built on Express and a Svelte frontend.             |
 | **[grpc-api-app](grpc-api-app/)**   | Address book app built using a gRPC API.                                                   |
 | **[grpc-rest-app](grpc-rest-app/)** | Address book app built using a gRPC API with a REST endpoint using an Envoy reverse proxy. |
 
